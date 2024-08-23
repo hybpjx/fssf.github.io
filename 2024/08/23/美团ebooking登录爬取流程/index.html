@@ -22,7 +22,7 @@
 
   
 
-  <title>反爬基础与大纲 | 始識’s 博客</title>
+  <title>美团ebooking登录爬取流程 | 始識’s 博客</title>
 
   
 
@@ -104,20 +104,22 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">反爬基础与大纲</h1>
+          <h1 class="title-wrap">美团ebooking登录爬取流程</h1>
           <h2 class="title-sub-wrap">
             <strong>hybpjx</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2024-08-22T16:15:25.000Z" itemprop="datePublished">2024-08-23</time>
+            <time  class="article-date" datetime="2024-08-23T07:55:16.000Z" itemprop="datePublished">2024-08-23</time>
           </h2>
           
           
           <ul class="wrap-list dark">
   
-    <li><a href="/categories/%E5%8F%8D%E7%88%AC/">📒 反爬</a></li>
+    <li><a href="/categories/%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B/">📒 项目流程</a></li>
     
 </ul>
           <ul class="wrap-list dark">
+  
+    <li><a href="/tags/login/">🏷️ login</a></li>
   
 </ul>
         </div>
@@ -150,52 +152,20 @@
         <!-- toc -->
 
 <ul>
-<li><a href="#%E5%9F%BA%E4%BA%8E%E5%8F%8D%E7%88%AC%E7%B3%BB%E7%BB%9F%E5%92%8C%E6%B5%8F%E8%A7%88%E5%AE%89%E5%85%A8%E4%BD%93%E7%B3%BB">基于反爬系统和浏览安全体系</a></li>
-<li><a href="#%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a></li>
-<li><a href="#%E5%9F%BA%E4%BA%8Egrpc%E7%9A%84%E5%8F%8D%E7%88%AC%E8%99%AB">基于GRPC的反爬虫</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87%E7%BD%91%E7%AB%99">目标网站</a></li>
+<li><a href="#cookie%E4%BC%A0%E5%85%A5%E6%B5%81%E7%A8%8B">cookie传入流程</a></li>
 </ul>
 <!-- tocstop -->
 
-<h1><span id="基于反爬系统和浏览安全体系">基于反爬系统和浏览安全体系</span></h1><p>相比逆向更加有亲和力，逆向只有最后一刻才能得到成就感</p>
-<p>所有反爬的手段只有两个</p>
-<ol>
-<li>鉴权阻止进入（开发端拦截）</li>
-<li>高频组织数据大面积泄露 &#x2F; 防止服务器崩溃（风控层面）</li>
+<h1><span id="目标网站">目标网站</span></h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://ebooking.meituan.com/ebk/login/login.html?redirect=https://ebooking.meituan.com/ebooking/new-workbench/index.html">登录 | 美团酒店EBooking (meituan.com)</a></p>
+</blockquote>
+<h1><span id="cookie传入流程">cookie传入流程</span></h1><ol>
+<li>获取cookie [ebbsid] 这个值  直接hook到session中。</li>
+<li>请求ebooking&#x2F;common&#x2F;basicinfo 这个请求 拿到酒店信息</li>
+<li>根据返回的酒店信息拿到UserID和partnerId 当作 【_mtsi_eb_u 】【 _mtsi_eb_p 】【 optimus_uuid】</li>
+<li>伪造请求orders&#x2F;auto&#x2F;poiList 拿到酒店ID</li>
 </ol>
-<p>app 和 web 整体的思想和逻辑是不变的</p>
-<ol>
-<li><p>最开始的本质只是采集数据  &gt;&gt;&gt; 因为我们在获取数据的时候 人为采集太费时间</p>
-</li>
-<li><p>采集数据 （招投标 工商信息。外卖 等等） 转变&gt;&gt;&gt;&gt; 采购 | 抢票 | 模拟登录 | 自动渗透| 刷票| 黄牛| &gt;&gt;&gt; 转变鉴权时期  (没有意识到数据的价值)</p>
-</li>
-<li><p>协议采集 逆向成本高 资源低 性能好 ＞让采集成本高 第一优先级 鉴权 高频拦截</p>
-</li>
-<li><p>真机采集  逆向成本低 资源高 性能低 ＞  高频拦截</p>
-</li>
-<li><p>web自动化 指纹浏览器 rpc rpa</p>
-</li>
-<li><p>app 真机 改机 沙箱 群控 rpc</p>
-</li>
-</ol>
-<p>所谓的反爬的原理 就是利用 浏览器和协议爬虫脚本之间的区别去拦截流量</p>
-<h1><span id="密码学">密码学</span></h1><p>明文 ——&gt; 加密——&gt; 密文——&gt; 解密——&gt; 明文</p>
-<p>密码学的研究领域可分为密码编码学（cryptography）和密码分析学（cryptanalysis）两个分支</p>
-<p>类似于反爬与爬虫 前者负责加密  后者负责加密</p>
-<p>举个例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript">code_book = &#123;<br>    <span class="hljs-string">&quot;a&quot;</span>: <span class="hljs-string">&quot;1&quot;</span>,<br>    <span class="hljs-string">&quot;b&quot;</span>: <span class="hljs-string">&quot;2&quot;</span>,<br>    <span class="hljs-string">&quot;c&quot;</span>: <span class="hljs-string">&quot;3&quot;</span>,<br>&#125;<br><br>def <span class="hljs-title function_">encrypt</span>(t):<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.<span class="hljs-title function_">join</span>([code_book[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> t])<br><br>name = <span class="hljs-string">&quot;bccba&quot;</span><br><span class="hljs-title function_">print</span>(<span class="hljs-title function_">encrypt</span>(name))<br></code></pre></td></tr></table></figure>
-
-<p>这就完成了 bccba 到 23321的过程</p>
-<p>常用加密算法</p>
-<ol>
-<li>对称加密算法： AES 、DES、 3DES、</li>
-<li>国密 SM1234</li>
-<li>非对称加密算法：RSA、DCC、DSA</li>
-<li>哈希摘要算法：MD5、Sha系列、</li>
-</ol>
-<h1><span id="基于grpc的反爬虫">基于GRPC的反爬虫</span></h1><p>PB的技术实现。序列化和反序列化</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf">https://github.com/protocolbuffers/protobuf</a></p>
-<p>原理就是读取 proto文件从而解析 获取里面的pack 和 message </p>
-<p>进而创建一个数据载荷。然后把这个数据载荷去发送</p>
 
       </section>
 
@@ -203,20 +173,20 @@
       
         <nav class="article-nav">
           
+          
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
     <div class="card-text">
       
-        <a href="/2024/08/23/%E5%8F%8D%E7%88%AC%E6%80%BB%E7%BB%93/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">反爬总结</h2>
+        <a href="/2024/08/23/QQ%E9%9F%B3%E4%B9%90/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">JSVMP逆向流程——QQ音乐</h2>
         </a>
       
-      <div class="card-text--row">Newer</div>
+      <div class="card-text--row">Older</div>
     </div>
   </article>
 </div>
-          
           
         </nav>
       
@@ -466,13 +436,13 @@
         <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
 </svg>
-        2
+        3
       </div>
       <div class="count-box--item">
         <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
 </svg>
-        1
+        2
       </div>
     </div>
   </div>
@@ -505,14 +475,20 @@
     <ul class="categories-list">
       
         <li class="categories-list-item">
-          <a href="/categories/%E5%8F%8D%E7%88%AC/">
-            反爬 (2)
+          <a href="/categories/JS%E9%80%86%E5%90%91/">
+            JS逆向 (1)
           </a>
         </li>
         
         <li class="categories-list-item">
-          <a href="/categories/JS%E9%80%86%E5%90%91/">
-            JS逆向 (1)
+          <a href="/categories/%E9%A1%B9%E7%9B%AE%E6%B5%81%E7%A8%8B/">
+            项目流程 (1)
+          </a>
+        </li>
+        
+        <li class="categories-list-item">
+          <a href="/categories/%E5%8F%8D%E7%88%AC/">
+            反爬 (1)
           </a>
         </li>
         
@@ -529,7 +505,7 @@
   </div>
   <div class="widget-body">
     <div class="tags-cloud">
-      <a href="/tags/JSVMP/" style="font-size: 10px;" class="tags-cloud-0">JSVMP</a>
+      <a href="/tags/JSVMP/" style="font-size: 10px;" class="tags-cloud-0">JSVMP</a> <a href="/tags/login/" style="font-size: 10px;" class="tags-cloud-0">login</a>
     </div>
   </div>
 </section>
