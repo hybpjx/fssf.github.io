@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Gin_Resonse返回格式</title>
-    <url>/2024/08/26/Gin-Resonse%E8%BF%94%E5%9B%9E%E6%A0%BC%E5%BC%8F/</url>
-    <content><![CDATA[<!--toc-->
-<hr>
-<p>目的： gin返回restful格式的数据，返回的200，201 的数据 也包括异常时的404&#x2F;500等情况<br>全局统一返回RESTful风格数据，主要是实现Respon接口的方法，对返回值在输出之前进行修改。</p>
-<p>直接调用下文代码即可</p>
-<h1><span id="第一种方式">第一种方式</span></h1><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> response<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br> <span class="hljs-string">&quot;net/http&quot;</span><br>)<br><br><span class="hljs-comment">// Response</span><br><span class="hljs-comment">// context 上下文</span><br><span class="hljs-comment">// httpStatus http 状态码</span><br><span class="hljs-comment">// code 自己定义的状态码</span><br><span class="hljs-comment">// data 返回的空接口</span><br><span class="hljs-comment">// msg 返回的信息</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Response</span><span class="hljs-params">(context *gin.Context, httpStatus <span class="hljs-type">int</span>, code <span class="hljs-type">int</span>, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(httpStatus, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: code,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Success</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusOK, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fail</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusOK, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">400</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">UnprocessableEntity</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusUnprocessableEntity, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">422</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br></code></pre></td></tr></table></figure></div>
-
-
-
-<p>后续可以自己添加方法然后固定的格式</p>
-<h1><span id="第二种方式">第二种方式</span></h1><p>构建一个结构体 然后只有有些无用的值是可以不传的。<br>这种方式对比上一种更加灵活多变。</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> api<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br> <span class="hljs-string">&quot;net/http&quot;</span><br> <span class="hljs-string">&quot;reflect&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> ResponseJson <span class="hljs-keyword">struct</span> &#123;<br> Status <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;-&quot;`</span><br> Code   <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;code,omitempty&quot;`</span><br> Msg    <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;msg,omitempty&quot;`</span><br> Data   any    <span class="hljs-string">`json:&quot;data,omitempty&quot;`</span><br>&#125;<br><br><span class="hljs-comment">// IsEmpty 判断结构体是否为空</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(r ResponseJson)</span></span> IsEmpty() <span class="hljs-type">bool</span> &#123;<br> <span class="hljs-keyword">return</span> reflect.DeepEqual(r, ResponseJson&#123;&#125;)<br>&#125;<br><br><span class="hljs-comment">// 构建状态码 ，如果 传入的ResponseJson没有Status 就使用默认的状态码</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buildStatus</span><span class="hljs-params">(resp ResponseJson, defaultStatus <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br> <span class="hljs-keyword">if</span> resp.Status == <span class="hljs-number">0</span> &#123;<br>  <span class="hljs-keyword">return</span> defaultStatus<br> &#125;<br> <span class="hljs-keyword">return</span> resp.Status<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">HttpResponse</span><span class="hljs-params">(ctx *gin.Context, status <span class="hljs-type">int</span>, resp ResponseJson)</span></span> &#123;<br> <span class="hljs-keyword">if</span> resp.IsEmpty() &#123;<br>  ctx.AbortWithStatus(status)<br>  <span class="hljs-keyword">return</span><br> &#125;<br> ctx.AbortWithStatusJSON(status, resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Success</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusOK), resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fail</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusBadRequest), resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ServerFail</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusInternalServerError), resp)<br><br>&#125;<br><br></code></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Gin速用</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>GoRequests库</title>
     <url>/2024/08/26/Golang%E4%B8%80%E6%97%A5%E4%B8%80%E5%BA%93%E4%B9%8BGoRequests/</url>
     <content><![CDATA[<!-- toc -->
@@ -92,6 +70,28 @@
 <div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> model<br><br><span class="hljs-keyword">import</span> (<br>    <span class="hljs-string">&quot;database/sql/driver&quot;</span><br>    <span class="hljs-string">&quot;fmt&quot;</span><br>    <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-keyword">const</span> timeFormat = <span class="hljs-string">&quot;2006-01-02 15:04:05&quot;</span><br><span class="hljs-keyword">const</span> timezone = <span class="hljs-string">&quot;Asia/Shanghai&quot;</span><br><br><span class="hljs-keyword">type</span> Time time.Time<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Time)</span></span> MarshalJSON() ([]<span class="hljs-type">byte</span>, <span class="hljs-type">error</span>) &#123;<br>    b := <span class="hljs-built_in">make</span>([]<span class="hljs-type">byte</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(timeFormat)+<span class="hljs-number">2</span>)<br>    b = <span class="hljs-built_in">append</span>(b, <span class="hljs-string">&#x27;&quot;&#x27;</span>)<br>    b = time.Time(t).AppendFormat(b, timeFormat)<br>    b = <span class="hljs-built_in">append</span>(b, <span class="hljs-string">&#x27;&quot;&#x27;</span>)<br>    <span class="hljs-keyword">return</span> b, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t *Time)</span></span> UnmarshalJSON(data []<span class="hljs-type">byte</span>) (err <span class="hljs-type">error</span>) &#123;<br>    now, err := time.ParseInLocation(<span class="hljs-string">`&quot;`</span>+timeFormat+<span class="hljs-string">`&quot;`</span>, <span class="hljs-type">string</span>(data), time.Local)<br>    *t = Time(now)<br>    <span class="hljs-keyword">return</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Time)</span></span> String() <span class="hljs-type">string</span> &#123;<br>    <span class="hljs-keyword">return</span> time.Time(t).Format(timeFormat)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Time)</span></span> local() time.Time &#123;<br>    loc, _ := time.LoadLocation(timezone)<br>    <span class="hljs-keyword">return</span> time.Time(t).In(loc)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t Time)</span></span> Value() (driver.Value, <span class="hljs-type">error</span>) &#123;<br>    <span class="hljs-keyword">var</span> zeroTime time.Time<br>    <span class="hljs-keyword">var</span> ti = time.Time(t)<br>    <span class="hljs-keyword">if</span> ti.UnixNano() == zeroTime.UnixNano() &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> ti, <span class="hljs-literal">nil</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(t *Time)</span></span> Scan(v <span class="hljs-keyword">interface</span>&#123;&#125;) <span class="hljs-type">error</span> &#123;<br>    value, ok := v.(time.Time)<br>    <span class="hljs-keyword">if</span> ok &#123;<br>        *t = Time(value)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">&quot;can not convert %v to timestamp&quot;</span>, v)<br>&#125;<br></code></pre></td></tr></table></figure></div>
 <h1><span id="调用">调用</span></h1><p>至于调用就更简单了 如下代码所示</p>
 <div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><br><span class="hljs-keyword">package</span> model<br><br><span class="hljs-keyword">type</span> Category <span class="hljs-keyword">struct</span> &#123;<br> <span class="hljs-comment">//*gorm.Model</span><br> ID       <span class="hljs-type">uint</span>      <span class="hljs-string">`json:&quot;id&quot; gorm:&quot;primary key&quot;`</span><br> Name     <span class="hljs-type">string</span>    <span class="hljs-string">`json:&quot;name&quot; gorm:&quot;type:varchar(50); not null;unique&quot;`</span><br> CreatedAt Time     <span class="hljs-string">`json:&quot;create_at&quot;`</span><br> UpdatedAt Time     <span class="hljs-string">`json:&quot;update_at&quot;`</span><br>&#125;<br><br></code></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>Gin速用</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Gin_Resonse返回格式</title>
+    <url>/2024/08/26/Gin-Resonse%E8%BF%94%E5%9B%9E%E6%A0%BC%E5%BC%8F/</url>
+    <content><![CDATA[<!--toc-->
+<hr>
+<p>目的： gin返回restful格式的数据，返回的200，201 的数据 也包括异常时的404&#x2F;500等情况<br>全局统一返回RESTful风格数据，主要是实现Respon接口的方法，对返回值在输出之前进行修改。</p>
+<p>直接调用下文代码即可</p>
+<h1><span id="第一种方式">第一种方式</span></h1><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> response<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br> <span class="hljs-string">&quot;net/http&quot;</span><br>)<br><br><span class="hljs-comment">// Response</span><br><span class="hljs-comment">// context 上下文</span><br><span class="hljs-comment">// httpStatus http 状态码</span><br><span class="hljs-comment">// code 自己定义的状态码</span><br><span class="hljs-comment">// data 返回的空接口</span><br><span class="hljs-comment">// msg 返回的信息</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Response</span><span class="hljs-params">(context *gin.Context, httpStatus <span class="hljs-type">int</span>, code <span class="hljs-type">int</span>, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(httpStatus, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: code,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Success</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusOK, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fail</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusOK, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">400</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">UnprocessableEntity</span><span class="hljs-params">(context *gin.Context, data gin.H, msg <span class="hljs-type">string</span>)</span></span> &#123;<br> context.JSON(http.StatusUnprocessableEntity, gin.H&#123;<br>  <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">422</span>,<br>  <span class="hljs-string">&quot;data&quot;</span>: data,<br>  <span class="hljs-string">&quot;msg&quot;</span>:  msg,<br> &#125;)<br>&#125;<br><br></code></pre></td></tr></table></figure></div>
+
+
+
+<p>后续可以自己添加方法然后固定的格式</p>
+<h1><span id="第二种方式">第二种方式</span></h1><p>构建一个结构体 然后只有有些无用的值是可以不传的。<br>这种方式对比上一种更加灵活多变。</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">package</span> api<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;github.com/gin-gonic/gin&quot;</span><br> <span class="hljs-string">&quot;net/http&quot;</span><br> <span class="hljs-string">&quot;reflect&quot;</span><br>)<br><br><span class="hljs-keyword">type</span> ResponseJson <span class="hljs-keyword">struct</span> &#123;<br> Status <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;-&quot;`</span><br> Code   <span class="hljs-type">int</span>    <span class="hljs-string">`json:&quot;code,omitempty&quot;`</span><br> Msg    <span class="hljs-type">string</span> <span class="hljs-string">`json:&quot;msg,omitempty&quot;`</span><br> Data   any    <span class="hljs-string">`json:&quot;data,omitempty&quot;`</span><br>&#125;<br><br><span class="hljs-comment">// IsEmpty 判断结构体是否为空</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(r ResponseJson)</span></span> IsEmpty() <span class="hljs-type">bool</span> &#123;<br> <span class="hljs-keyword">return</span> reflect.DeepEqual(r, ResponseJson&#123;&#125;)<br>&#125;<br><br><span class="hljs-comment">// 构建状态码 ，如果 传入的ResponseJson没有Status 就使用默认的状态码</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">buildStatus</span><span class="hljs-params">(resp ResponseJson, defaultStatus <span class="hljs-type">int</span>)</span></span> <span class="hljs-type">int</span> &#123;<br> <span class="hljs-keyword">if</span> resp.Status == <span class="hljs-number">0</span> &#123;<br>  <span class="hljs-keyword">return</span> defaultStatus<br> &#125;<br> <span class="hljs-keyword">return</span> resp.Status<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">HttpResponse</span><span class="hljs-params">(ctx *gin.Context, status <span class="hljs-type">int</span>, resp ResponseJson)</span></span> &#123;<br> <span class="hljs-keyword">if</span> resp.IsEmpty() &#123;<br>  ctx.AbortWithStatus(status)<br>  <span class="hljs-keyword">return</span><br> &#125;<br> ctx.AbortWithStatusJSON(status, resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Success</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusOK), resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Fail</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusBadRequest), resp)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">ServerFail</span><span class="hljs-params">(ctx *gin.Context, resp ResponseJson)</span></span> &#123;<br> HttpResponse(ctx, buildStatus(resp, http.StatusInternalServerError), resp)<br><br>&#125;<br><br></code></pre></td></tr></table></figure></div>
 ]]></content>
       <categories>
         <category>Gin速用</category>
@@ -240,139 +240,6 @@
       <tags>
         <tag>Golang</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>bcrypt库</title>
-    <url>/2024/08/26/Golang%E4%B8%80%E6%97%A5%E4%B8%80%E5%BA%93%E4%B9%8Bbcrypt/</url>
-    <content><![CDATA[<!-- toc -->
-
-<ul>
-<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
-<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
-<li><a href="#bcrypt%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D">bcrypt基本介绍</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#cost%E5%B8%B8%E9%87%8F%E5%88%86%E7%B1%BB">cost常量分类</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8">使用</a><ul>
-<li><a href="#generatefrompassword-%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAhash%E5%AF%86%E7%A0%81">GenerateFromPassword 生成一个hash密码</a></li>
-<li><a href="#cost%E6%96%B9%E6%B3%95-%E8%BF%94%E5%9B%9E%E7%BB%99%E5%AE%9A%E7%9A%84cost">Cost方法 返回给定的cost</a></li>
-<li><a href="#comparehashandpassword-%E5%AF%B9%E6%AF%94%E6%98%8E%E6%96%87%E5%AF%86%E7%A0%81%E5%92%8C%E6%95%A3%E5%88%97%E5%AF%86%E7%A0%81">CompareHashAndPassword 对比明文密码和散列密码</a></li>
-</ul>
-</li>
-<li><a href="#%E8%B0%83%E7%94%A8utils%E6%96%87%E4%BB%B6-%E9%9B%86%E6%88%90%E7%89%88">调用utils文件 —— 集成版</a></li>
-<li><a href="#bcrypt%E6%9F%90%E4%BA%9B%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B">bcrypt某些错误类型</a></li>
-</ul>
-<!-- tocstop -->
-
-<hr>
-<blockquote>
-<p>官方文档： <a class="link" href="https://pkg.go.dev/golang.org/x/crypto/bcrypt">https://pkg.go.dev/golang.org/x/crypto/bcrypt <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-</blockquote>
-<h1><span id="前言">前言</span></h1><p>之前讲过JWT Token JWT呢是信息是经过数字签名的，因此可以被验证和信任。<br>然后今天就来说说密码学，我们在做鉴权 做用户处理时 会把密码存储到数据库中，但是这个密码我们肯定不能明文去存储，如果这个数据库链接一旦被别人拿到<br>那后果是不堪设想的。不仅仅是为了防止系统管理员或者DBA等公司人员获得用户的密码，也是防止被黑客拖库产生更大的信息泄露。<br>如果黑客通过不法手段获取了服务的数据库存储信息，盗取里面的内容，从而直接获得明文密码，那么影响就会很大。<br>所以我们的密码一般通过几种方式去加密存储</p>
-<ol>
-<li><strong>MD5</strong></li>
-</ol>
-<p>其实个人觉得MD5加密不太好，因为MD5是不加盐的，虽然是不可逆的，但是黑客其实会针对常见的一些密码，生成彩虹表。<br>彩虹表是什么呢？<br><code>是用于加密散列函数逆运算的预先计算好的表，常用于破解加密过的密码散列（维基百科）</code><br>所以相对的感觉安全等级不是很够。</p>
-<ol start="2">
-<li><strong>SHA1及其他</strong></li>
-</ol>
-<p>SHA-1基于MD5，MD5又基于MD4<br>SHA-1是由美国标准技术局（NIST）颁布的国家标准，是一种应用最为广泛的Hash函数算法，也是目前最先进的加密技术，被政府部门和私营业主用来处理敏感的信息。<br>这个缺点个人认为和 MD5一样。</p>
-<ol start="3">
-<li><strong>hmacsha</strong></li>
-</ol>
-<p>我之前也写过相应的文章 里面有相应的hmasha加密<br>HMAC是密钥相关的哈希运算消息认证码（Hash-basedMessageAuthenticationCode）,HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。<br>HMAC是需要一个密钥的。所以，HMACSHA1也是需要一个密钥的，而SHA1不需要。</p>
-<ol start="4">
-<li><strong>CRC</strong></li>
-</ol>
-<p>CRC的全称为CyclicRedundancyCheck，中文名称为循环冗余校验。它是一类重要的线性分组码，编码和解码方法简单，检错和纠错能力强，在通信领域广泛地用于实现差错控制。实际上，除数据通信外，CRC在其它很多领域也是大有用武之地的。例如我们读软盘上的文件，以及解压一个ZIP文件时，偶尔会碰到“BadCRC”错误，由此它在数据存储方面的应用可略见一斑。</p>
-<ol start="5">
-<li><strong>还有很多加密方式这里就不一 一赘述了…</strong></li>
-</ol>
-<p>这里介绍一种加密方式 <code>bcrypt</code></p>
-<h1><span id="概述">概述</span></h1><p>bcrypt是一个由美国计算机科学家尼尔斯·普罗沃斯（Niels Provos）以及大卫·马齐耶（David Mazières）根据Blowfish加密算法所设计的密码散列函数，于1999年在USENIX中展示[1]。实现中bcrypt会使用一个加盐的流程以防御彩虹表攻击，同时bcrypt还是适应性函数，它可以借由增加迭代之次数来抵御日益增进的电脑运算能力透过暴力法破解。</p>
-<p>由bcrypt加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥。然而，所提供的所有字符都具有十分重要的意义。密码越强大，数据就越安全。</p>
-<p>除了对数据进行加密，默认情况下，bcrypt在删除数据之前将使用随机数据三次覆盖原始输入文件，以阻挠可能会获得计算机数据的人恢复数据的尝试。如果您不想使用此功能，可设置禁用此功能。</p>
-<p>具体来说，bcrypt使用美国密码学家保罗·柯切尔的算法实现。随bcrypt一起发布的源代码对原始版本作了略微改动。</p>
-<p><strong>以上内容来自于wiki维基百科</strong> &gt;&gt;&gt;&gt; <a class="link" href="https://zh.wikipedia.org/wiki/Bcrypt">https://zh.wikipedia.org/wiki/Bcrypt <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h1><span id="bcrypt基本介绍">bcrypt基本介绍</span></h1><p>其实简单来说<br><code>bcrypt</code>就是一种加盐的单向Hash，不可逆的加密算法，同一种明文（plaintext），每次加密后的密文都不一样，而且不可反向破解生成明文，破解难度很大<br>而我们熟知的另一种不可逆的加密算法<br><code>md5</code> 是不加盐的单向Hash，不可逆的加密算法，同一个密码经过hash的时候生成的是同一个hash值，在大多数的情况下，有些经过md5加密的方法将会被破解。</p>
-<p>Bcrypt生成的密文是60位的。而MD5的是32位的。<br>总的来说，BCrypt比MD5更安全，但加密更慢。<br>各有优缺点吧。</p>
-<p>这里推荐个网站可以完成 bcrypt的加密 我们来尝尝鲜。</p>
-<p><a class="link" href="https://www.bejson.com/encrypt/bcrpyt_encode/">https://www.bejson.com/encrypt/bcrpyt_encode/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h1><span id="安装">安装</span></h1><p>这里找遍了全网好像也没找到github地址。并且也没有什么安装的教程。</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">go</span> get -u golang.org/x/crypto/bcrypt<br></code></pre></td></tr></table></figure></div>
-
-<h1><span id="cost常量分类">cost常量分类</span></h1><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">const</span> (<br>        <span class="hljs-comment">// 传递给GenerateFromPassword的最小允许开销</span><br> MinCost     <span class="hljs-type">int</span> = <span class="hljs-number">4</span>  <br>        <span class="hljs-comment">// 传递给GenerateFromPassword的最大允许开销</span><br> MaxCost     <span class="hljs-type">int</span> = <span class="hljs-number">31</span><br>        <span class="hljs-comment">// 如果将低于MinCost的cost传递给GenerateFromPassword，则实际设置的cost</span><br> DefaultCost <span class="hljs-type">int</span> = <span class="hljs-number">10</span> <br>)<br></code></pre></td></tr></table></figure></div>
-
-<h1><span id="使用">使用</span></h1><p>这里我们直接看官方写好的测试用例，可能需要 …(你懂的)<br><a class="link" href="https://cs.opensource.google/go/x/crypto/+/refs/tags/v0.8.0:bcrypt/bcrypt_test.go">https://cs.opensource.google/go/x/crypto/+/refs/tags/v0.8.0:bcrypt/bcrypt_test.go <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2><span id="generatefrompassword-生成一个hash密码">GenerateFromPassword 生成一个hash密码</span></h2><p>GenerateFromPassword以给定的代价返回密码的bcrypt散列。如果给定的cost小于MinCost，则该cost将被设置为DefaultCost。<br>GenerateFromPassword不接受长度超过72字节的密码，这是bcrypt操作的最长密码</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">password, _ := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>), bcrypt.DefaultCost)<br>fmt.Println(<span class="hljs-type">string</span>(password))<br></code></pre></td></tr></table></figure></div>
-<p>结果如下<br>第一次</p>
-<blockquote>
-<p>$2a$10$SNRLHrG.ExJHKfR8LihSLOqAJOu&#x2F;hCpP0ARhwoKvsduxv5xMXkl4u<br>第二次<br>$2a$10$Np1EBVQ9DZXMvIUkT7Y2P.cA0psEmW2SAVJYcCDqDDN8TsASo7aZm</p>
-</blockquote>
-<p><strong>注： 每次结果都不一样 因为这不是MD5加密，会通过加盐来完成不可逆的加密</strong></p>
-<h2><span id="cost方法-返回给定的cost">Cost方法 返回给定的cost</span></h2><p>Cost返回用于创建给定散列密码的散列成本。将来，当密码系统的哈希成本需要增加以适应更大的计算能力时，这个功能允许人们确定需要更新哪些密码。<br>简单来说 返回上文的 bcrypt.DefaultCost</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">cost, _ := bcrypt.Cost([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;$2a$10$XgLBtSfJsrBd.liLOYWddOYWYWboBUAlKmivcSwq647C3vTNUOVMO&quot;</span>))<br>fmt.Println(cost)<br></code></pre></td></tr></table></figure></div>
-<p>结果如下</p>
-<blockquote>
-<p>10</p>
-</blockquote>
-<h2><span id="comparehashandpassword-对比明文密码和散列密码">CompareHashAndPassword 对比明文密码和散列密码</span></h2><p>CompareHashAndPassword，将返回的散列密码与其明文版本进行比较。</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">password, _ := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>), bcrypt.DefaultCost)<br>fmt.Println(<span class="hljs-type">string</span>(password))<br><br><span class="hljs-comment">// 可以解析出上文</span><br>cost, _ := bcrypt.Cost([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;$2a$10$XgLBtSfJsrBd.liLOYWddOYWYWboBUAlKmivcSwq647C3vTNUOVMO&quot;</span>))<br>fmt.Println(cost)<br><br>err := bcrypt.CompareHashAndPassword(password, []<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>))<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br> fmt.Println(<span class="hljs-string">&quot;密码验证错误&quot;</span>, err)<br>&#125;<br>fmt.Println(<span class="hljs-string">&quot;密码验证成功&gt;&gt;&gt;&quot;</span>, <span class="hljs-literal">nil</span>)<br></code></pre></td></tr></table></figure></div>
-<p>结果</p>
-<blockquote>
-<p>$2a$10$ANuBn8FthHbgfYir4v65AOvdtqoR3xjZ0G8duN5ynH1Vm0h3yUF&#x2F;G<br>10<br>密码验证成功&gt;&gt;&gt; <nil></nil></p>
-</blockquote>
-<h1><span id="调用utils文件-集成版">调用utils文件 —— 集成版</span></h1><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> utils<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;golang.org/x/crypto/bcrypt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Encrypt</span><span class="hljs-params">(encryptText <span class="hljs-type">string</span>)</span></span> (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) &#123;<br> hashStr, err := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(encryptText), bcrypt.DefaultCost)<br> <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, err<br> &#125;<br> <span class="hljs-keyword">return</span> <span class="hljs-type">string</span>(hashStr), err<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CompareHashAndPassword</span><span class="hljs-params">(hashPassword, Password <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br> err := bcrypt.CompareHashAndPassword([]<span class="hljs-type">byte</span>(hashPassword), []<span class="hljs-type">byte</span>(Password))<br><br> <span class="hljs-keyword">return</span> err == <span class="hljs-literal">nil</span><br>&#125;<br><br></code></pre></td></tr></table></figure></div>
-
-<h1><span id="bcrypt某些错误类型">bcrypt某些错误类型</span></h1><ul>
-<li><p>type HashVersionTooNewError byte</p>
-<blockquote>
-<p>使用 创建哈希时从 CompareHashAndPassword 返回的错误 比此实现更新的 bcrypt 算法。<br>func (hv HashVersionTooNewError) Error() string 调用error返回字符串</p>
-</blockquote>
-</li>
-<li><p>type InvalidCostError int</p>
-<blockquote>
-<p>类型 无效cost错误<br>func (ic InvalidCostError) Error() string 调用error返回字符串</p>
-</blockquote>
-</li>
-<li><p>type InvalidHashPrefixError byte</p>
-<blockquote>
-<p>类型无效哈希前缀错误<br>当哈希以“$”以外的内容开头时，从 CompareHashAndPassword 返回的错误<br>func (ih InvalidHashPrefixError) Error() string 调用error返回字符串</p>
-</blockquote>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>一日一库</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu下安装redis并且设置远程登陆和密码</title>
-    <url>/2024/08/26/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E5%92%8C%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[<!--toc-->
-<hr>
-<h1><span id="安装redis">安装redis</span></h1><blockquote>
-<p>sudo apt-get install -y redis-server</p>
-</blockquote>
-<h1><span id="更改配置">更改配置</span></h1><blockquote>
-<p>sudo vim &#x2F;etc&#x2F;redis&#x2F;redis.conf</p>
-</blockquote>
-<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/XThu9WoMF1INzCJ.png"><br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/wGmL1tdIK6EhqWQ.png"><br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/zRoObl6vKPq1riC.png"></p>
-<p>如果不知道怎么找<br>直接在命令行模式下输入<br>&#x2F;{你要搜索的东西} 然后按回车 然后按n是下一个 N是上一个</p>
-<h1><span id="重启服务">重启服务</span></h1><blockquote>
-<p>systemctl restart redis-server.service</p>
-</blockquote>
-<h1><span id="远程连接">远程连接</span></h1><p>使用远程工具 Redis Desktop Manager<br>下载地址<br>官网: <a class="link" href="https://resp.app/pricing">https://resp.app/pricing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>百度网盘：<a class="link" href="https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g">https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>提取码：00c0</p>
-<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/lynw3ZIqLeWk8g9.png"></p>
-<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/hziQdgPOETZaojN.png"><br>然后测试连接<br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/mHoUBhuOxEz5W1e.png"></p>
-<p>代表成功</p>
-]]></content>
-      <categories>
-        <category>快速安装</category>
-      </categories>
   </entry>
   <entry>
     <title>Javacript加密解密方法</title>
@@ -778,27 +645,166 @@
       </tags>
   </entry>
   <entry>
-    <title>JSVMP逆向流程——QQ音乐</title>
-    <url>/2024/08/23/QQ%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[
-<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="0cd6cfe9c209202cba0eb30b163c3830b091494bf4c156abdcba8167b2d44c9f">83e5631915b29311d4c3e64518d9116c9395bd0bf0663511fddd5e52bc0d8aa3e5bb18f4e03292ce901d25496b3c090e6234a36c8afa24646975318692b32b54510aa5eb10c57f0d1d138b1787cd44420ebab759e29d372cf2b4f3d7ea27a7ca146fd5d430a1a8dd7812ddb1042c132a5e64322e97f681db01bd05348f3713c9aa4580358160ee9c73174dddd339cc1e19e402ee3cf4ec9be94795e35af1886e223e9d85c63785a3e63509d7cd6610a570f0117f75257fa474e430c1ac5a4681b45d6ccbd354656c0780f89cda595ee744e6972217b239d19d029a3774fa63fa39ed3febfdb1df0201522ea3102744f14a1d3c4caacfd5bb25fbf6290ba52ae0a519ca4cbc9d1d93963231e8ef8f29301480d82d65fa340e90344409a5103c8b2394948a66a35a677e64768ee5fa166628802d862e61c14b422cda00714fabd7369f3e3420a5c107b7900b1c71f30c7397d733df16ab13b05032830a20c11f03568570739c8a3e0ee2ee7a659acb3155675952ee8da91abc196181c315083827ee5c979b6c8c5ce6e47afdcb4b6f7f64515d5e827a4396d71d6ff70543c6820ee0c6faa522080f6410d0b459ae8ea56ac574fb3d3fb5ef61e5fccaf034911b181690b5dd4f5717da40f38d47a9b6a875c0bb12b2b1ca888ffe031061c52d69f1abfc4e71ccf9c5866f7133c8431a68f5239d110c1cd7967c221b4675c04ad1be9e87f6d2d6c2f46f6812728b8638bff22090a575a87768082762d9c9cfb87341737a9b3a9fe1cb3e168be8c6da17e5b83478b999ede313a1edafc51e05675534ed8450e036d6ab9c758d0ec3691ee8533f373e6fe49b107378724e34873cf5f33c5acea7e26b0c6804c02c6c1eabfac14223d495d4f8ff11fd17eb67cf5a9ead3730ac53bb2afb9b2870e9c0dd6a61af9ad14e972eab815a1e13d2e377c46092b3fd7bd6eff4ad147d475a1dcca91243a325f2b064e8da6455909b40993bb6b505ccb55420750b8bccc7cbb2022bb48605fa1f2cdbcbd3a207e613f9e9e69ec0b61e082765ca8f78e1deca900d760e27696b2f131c75cdedf9a0664c1ee39ef6a36f046b49cf75fb45a38d8b3da49b4eb5696cb106d33313765fb5bf2052bbc3eb7460fdcb5a8d70532f6e91172ac9450dbe6c052e0a152ba7b33cb0fe5818795ffbdf2d721d43bbf2fc67db19ace627c1c6bf67ed774e87a1f9132c99784cce80da318871902f5cf544f5b4b8f5f5a8be4154a22afc443fc6df4b6e9b3113e8213f4ccef0861bb35d422446c05807b2d40dcc170993d1e9502261e95d2c107d4b820b5037ac68a0ffbc7fe15c0dc9cc540f05bf52a96e95139b6350020cd2ef04e3dbbff4a925081b5b87a8235473ec36bf6153eabf4accf348eda97db8baa7db283f8f638abd1714add57ca9eba57efd93317a67f375be738eef3ed95a3857776ef69046965cd5d7a157026280e9b3e45ad9b1c7a8f4be94b70cab853fd5f2ea816b169264c818ba899a0b580f7f31d1ba67041d6115501fa9a3c0e9c7d8e642379aa203226f3dd94d322469e274451e89bc390d75bf9ccf6103f11d82dac05f7101747713aafd28115e621e4a5cc919a2789f125d5bd35e8575f2fd01094a0fbc3066410bd018abf6a7ac787bc2828a05e2229f335bec1fce525e52b8a25d10dd08b21c426286b9287bbf04305974e7786b5f49f527633433f1711132b091e5f1632309d9e98013f00ad8ee83c52ec7a4a2ff9310deb59bfb3537ab0ad7e4ce08471122b6bba26f19d61f77797d7164dc926eaff62f9c7e327126468934060f056e287e6b387fe01360d7b85df0eb9f1e6283a213feca8111b7a807f893ec796b51bcdc29b3b8bba44a754d8b0457158c8dc6b342d65a596f3a177fc3859201c9185694953d0ae7d2f3051702e41460a8afb1daf014be6b91299737889ce9156fc5aa81c91cb75a72e5cee643e3c375919c4a24681c6d7b63564c27e081d2b0a9f1bde816c22742c1ac2b1e5d8eb6d68cbf12ca2dc9f5d14462506983a5608041aec4fe519cd8b7912c42098560f3afd18cb25ad424aefdc1359a0141caec73de05297255e66ab02eafcfd328afa1b56e78272a12701576bf5a430ee5e4bf050e9879d143ae7d922775aed32f73f63b4b951af40e29eb956cd44abf1c642e59ee10552605c43601bf1539ac10fa6a4be3765ca1cb71e09de147e484a909bd33b27832100271e7ed7d946ece8075d9a39d254a6348f2ce94eb306805cad32932e36a229fdfbd0ba7ad5cbd87c1cb6c42b108a10f2d8d43a5534a65f20744a0f20bdb07b39c68d70e7f37c0f1cd22d4a899d435a870326583d76690a1c413448cf43e699f57a84cbef67fd9d391b40dba6359afebff19c0e987dc97f38e105ad91302155a478c7048ffcf842c36d9d5f25d28315205d5f288e4e6848befd0496aebaaad53b24e9cb8797aaec8256d7881eaf1eeb8834b7e69ed080d7bcfb228538090a9f1f43313d3e9d54d0fac093700e9dd4eb966bbe918f8aa91ba25548104bdfa5e5cdd2d32e01400d4296bc61bf2609bce4885e232dd43868e6d36cbcd54caf2a67d731cca76df3c375ecc2fb2ebecfe3dc1e2bb8abf396880452cc0fe40e559e4e2a8c5d2f0a2ad4e15c657c7aee45126aaa03075c775a2356f3b1763d2ff32075802b7ae1accb41ead02b25798dd4fc26f09d3131d3506b7e316b6344035314f03bcf7ecca1c8c15aeea2a3942d1a4020b12175a584e2a3f2326d1c99197dbf5eeb6ca582c04cc9bb9435db2cbee6c617a0f0b79dc1b2667b70ff1c87e174ed3582edb5fdb7a1f356fa82a0de6afca490e311c922031a0a7dd6bd2d486c9be1af0bea2df04759dc556db5730f2955a8ef6343990b1bc550a37d41c4d2ec27023ee80498eb1bd3d78fd0ad033575ee7ea174e2ed018f93a05951c6662e32f195c6034b08c07e8d7b3e9ac65d8edc09d27c788f2a4a780da3226288ce5c51c957be1cde566856263d1c64db6950eb0e8a0395ce7d9bc694782d74aa11960f793904bfa7372963536ef000dd915bf5f4f7dec47ae1c2729b45735fe2c23e10070ec5e539c79e40afac3a29eb3953840e909dca15d07fe46ad1cce28b1171eabd463c47ea15fa95deefca72ba68f07a0a184c56b9135824f9acf5bc18d1f3b964505b4c033b976b31cc8f4c83e14ef5cb730b130d3c67357998beccaaf2fc552e6f15c51d1877016a5ea61d8cb62fdf1b1676df5f88cdfed39c3630e782324d6507e966e51928b77f8abcd6ef033a950d9e4553dc7969e399972ac07e6663bcf33d5b0c0038de2de1a3071fd205e162852cc64f1381654cc44786c3724ac96addb6b2b33c05a96e085427c5ae75c82a659e89aa342b049c60e179e521c92c717e356654bc6458da0090ad19a1c187fbe9d87e79427d425687e24d28a5098d47a1cdb50cd597783b57af2378f54b224a1570573f6cb6c8dc567b10263298a64294dc1929aa6fd02222795e6ee44de12d305e0e9a380259f6f23ce1c43f25c063bf0f35d214e5c89407f0e944b1046636877bf3bb1db9370179ad407057da860452b7975a73ebb598fe2c325ba208da17ac0d770179a996332e41d5bb3a77bfee722d34257c7bee7cd85db10853ffe1e1bf638a63bc0ae12c738fdf564c7e37cc85d6452b138383b093a48c27b2c637a8ecd7e51a006e127fe78eee110d64dbd18cdd5e332ff466c6b74def3e71327160a1d30f2c5fc714be522be7adabcd3cb681b10a06ceedd2f522f93a64c8ffad9bddb3fe7ab7d93d955a74cd7991fa2545c84a88c41b6ec5b37f45f484760b1ebdcb2acaf8262bd45dc074d3bd93df464c6bf728a1e23bb27d8e3e4d56813f0f406b322072fbadfa031ca6deae949fd39f2c991d386c3c4acbb1ae840581e3417577688f8b3ca863ec390d3de25415f9386105d80883e5c7b62f4950054c35a245c7f568f0579c331c74b22658649a9e475423b48ab30eca8f86d0ddc5392daef6e31e0131a31078244790a9a1df315f98caced386900c0e2e1830bde9a85c3c2820eaa6e40dcd97442b92f6764aaeec3af27356d791f712ce0c28e258f6847d1a7a7400def966468c3d2184f8d51c175cd6063d3f6cf8553c0ea9fb650f8d8294f140d73f0b949d50dcd99f2f1a0f97c899162f6f89d2b6a5766be6bbb392ec940a3f48815f638ed197c2119fe7ac44a53aa1ecb54ffa27d99814c943ba3794165b25a0d70fa84314d0a03c111f04539eaaf50eb18e5c5e13dc403b7cc1ff709366028901ee09258a246ad06279776807ed8946a5897643166324581731447538a1ee0204a75cb9d7f6dcc6ccceda302de78cd11ca65796f96cb2068ce8c8445ffa36ba82b04fdb1577a4b44e3790ab589563871451b9beef7b8717031d64a3eb2861b3343dbc4005534917862163b238d527d968fe198108027b125caad443d43c16846c35601556c5962f0593fa442f0d2cc46a42a7c4850bc3cea487ee1aeeff1ae5c7fe0e9ea7faf46242cd19b75f831279bb63ce8d1346a422ed9489d1413550f6c56e903dbcb7732efbcad2d01178c8b93996088c9ced29eec1f17f4149f07679ae58b817f7adf7438a4052f9c6045bae0293eccb4b5cdd7c9a4287107b237f2607468e6b86ce472ce1d3af0220f5cdbbfef59588d464f7266b9b4b01f86cdeb28266a8e3243205cab3ad44bf66493d9530fb6249bff66680024fce4a52b12c1d92d8f43f4bfd15d5e0dd345605de9978d7318586aded11e1cdaa541a0a1072042df9024b2c74f69c1fc8db3abace33f2917e055748221557a4ded55551cd5083a79c2e944c1b00d93d00ea7b69231f32bb03d704891ec70313366c4341cc55af09d3dd530e39c55e8a7b55bb6b67bd4e7a0a85b2d15f0770d3974aeb64f02c0dc79246d2aa96974e919eea263f55aba1437528b5d6111716dd9818d07484121a48394a0ee808621f0bce75c79f7cf25fc7a96941609ae9b0f2789eeebdbc808ef46fc4ae44d89b42a758c5c35e39ddd08ca46d071946874ce91bf23ba68c5fc415f8930032e9270212e7305882120d3af1fc6d639fc48d970fb3f41a28d957c76c76b37a209f363baa953ebd852b7aa0390143f17514a1f89ccf36fb5d2cc592d8680745f157886edf1686ebf8758c8132bf8cbd7996b56d7a70d83ad6a4ff283e96521a240921b8038e6e15dad59836ec900ad8e52f35397aca92850b7b3d1b2ba712078d962b436cb674e50383f26d51fe3736945aca292876d6a21991a7c26cce28ae837a372127cb68b56378ea348dd90701d19fac32dad74b404d6dea93ecda6c5084537c6928aea40e7379abc8891c1d95bdc02126ce80e49a49073bea9a35c9176ecad26ad6285ad187be5fe4327cd12414f43839dbb792937411c8e272bb108ce79991bbc80c30ac05d4c7adca82b0e1613a9cc99fbf3465094e80dbea01ba471f8fd87677018ca30ed2daa13b8f4e612853be5a06db8171be207766054ba000c66af5464f5f086ffdf839a7a885597116275be0d0fb8dffb7c92c127ecb92b385e036efe9cd023489a580721e952fa41b7591a82f12cce6371b4575b572e229301b54aec9a440efb56de123ff216d16295eaeb82855c6ac38fb573230032dd80fd32381aca628d49c976ba7e6c0176ca1dd805b1b546e2d5005e31f3483f05b7aeb21e6a9b3a519ac4c1439a94a1f2820860f029d17df7</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+    <title>bcrypt库</title>
+    <url>/2024/08/26/Golang%E4%B8%80%E6%97%A5%E4%B8%80%E5%BA%93%E4%B9%8Bbcrypt/</url>
+    <content><![CDATA[<!-- toc -->
+
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#bcrypt%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D">bcrypt基本介绍</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#cost%E5%B8%B8%E9%87%8F%E5%88%86%E7%B1%BB">cost常量分类</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a><ul>
+<li><a href="#generatefrompassword-%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AAhash%E5%AF%86%E7%A0%81">GenerateFromPassword 生成一个hash密码</a></li>
+<li><a href="#cost%E6%96%B9%E6%B3%95-%E8%BF%94%E5%9B%9E%E7%BB%99%E5%AE%9A%E7%9A%84cost">Cost方法 返回给定的cost</a></li>
+<li><a href="#comparehashandpassword-%E5%AF%B9%E6%AF%94%E6%98%8E%E6%96%87%E5%AF%86%E7%A0%81%E5%92%8C%E6%95%A3%E5%88%97%E5%AF%86%E7%A0%81">CompareHashAndPassword 对比明文密码和散列密码</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B0%83%E7%94%A8utils%E6%96%87%E4%BB%B6-%E9%9B%86%E6%88%90%E7%89%88">调用utils文件 —— 集成版</a></li>
+<li><a href="#bcrypt%E6%9F%90%E4%BA%9B%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B">bcrypt某些错误类型</a></li>
+</ul>
+<!-- tocstop -->
+
+<hr>
+<blockquote>
+<p>官方文档： <a class="link" href="https://pkg.go.dev/golang.org/x/crypto/bcrypt">https://pkg.go.dev/golang.org/x/crypto/bcrypt <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+</blockquote>
+<h1><span id="前言">前言</span></h1><p>之前讲过JWT Token JWT呢是信息是经过数字签名的，因此可以被验证和信任。<br>然后今天就来说说密码学，我们在做鉴权 做用户处理时 会把密码存储到数据库中，但是这个密码我们肯定不能明文去存储，如果这个数据库链接一旦被别人拿到<br>那后果是不堪设想的。不仅仅是为了防止系统管理员或者DBA等公司人员获得用户的密码，也是防止被黑客拖库产生更大的信息泄露。<br>如果黑客通过不法手段获取了服务的数据库存储信息，盗取里面的内容，从而直接获得明文密码，那么影响就会很大。<br>所以我们的密码一般通过几种方式去加密存储</p>
+<ol>
+<li><strong>MD5</strong></li>
+</ol>
+<p>其实个人觉得MD5加密不太好，因为MD5是不加盐的，虽然是不可逆的，但是黑客其实会针对常见的一些密码，生成彩虹表。<br>彩虹表是什么呢？<br><code>是用于加密散列函数逆运算的预先计算好的表，常用于破解加密过的密码散列（维基百科）</code><br>所以相对的感觉安全等级不是很够。</p>
+<ol start="2">
+<li><strong>SHA1及其他</strong></li>
+</ol>
+<p>SHA-1基于MD5，MD5又基于MD4<br>SHA-1是由美国标准技术局（NIST）颁布的国家标准，是一种应用最为广泛的Hash函数算法，也是目前最先进的加密技术，被政府部门和私营业主用来处理敏感的信息。<br>这个缺点个人认为和 MD5一样。</p>
+<ol start="3">
+<li><strong>hmacsha</strong></li>
+</ol>
+<p>我之前也写过相应的文章 里面有相应的hmasha加密<br>HMAC是密钥相关的哈希运算消息认证码（Hash-basedMessageAuthenticationCode）,HMAC运算利用哈希算法，以一个密钥和一个消息为输入，生成一个消息摘要作为输出。<br>HMAC是需要一个密钥的。所以，HMACSHA1也是需要一个密钥的，而SHA1不需要。</p>
+<ol start="4">
+<li><strong>CRC</strong></li>
+</ol>
+<p>CRC的全称为CyclicRedundancyCheck，中文名称为循环冗余校验。它是一类重要的线性分组码，编码和解码方法简单，检错和纠错能力强，在通信领域广泛地用于实现差错控制。实际上，除数据通信外，CRC在其它很多领域也是大有用武之地的。例如我们读软盘上的文件，以及解压一个ZIP文件时，偶尔会碰到“BadCRC”错误，由此它在数据存储方面的应用可略见一斑。</p>
+<ol start="5">
+<li><strong>还有很多加密方式这里就不一 一赘述了…</strong></li>
+</ol>
+<p>这里介绍一种加密方式 <code>bcrypt</code></p>
+<h1><span id="概述">概述</span></h1><p>bcrypt是一个由美国计算机科学家尼尔斯·普罗沃斯（Niels Provos）以及大卫·马齐耶（David Mazières）根据Blowfish加密算法所设计的密码散列函数，于1999年在USENIX中展示[1]。实现中bcrypt会使用一个加盐的流程以防御彩虹表攻击，同时bcrypt还是适应性函数，它可以借由增加迭代之次数来抵御日益增进的电脑运算能力透过暴力法破解。</p>
+<p>由bcrypt加密的文件可在所有支持的操作系统和处理器上进行转移。它的口令必须是8至56个字符，并将在内部被转化为448位的密钥。然而，所提供的所有字符都具有十分重要的意义。密码越强大，数据就越安全。</p>
+<p>除了对数据进行加密，默认情况下，bcrypt在删除数据之前将使用随机数据三次覆盖原始输入文件，以阻挠可能会获得计算机数据的人恢复数据的尝试。如果您不想使用此功能，可设置禁用此功能。</p>
+<p>具体来说，bcrypt使用美国密码学家保罗·柯切尔的算法实现。随bcrypt一起发布的源代码对原始版本作了略微改动。</p>
+<p><strong>以上内容来自于wiki维基百科</strong> &gt;&gt;&gt;&gt; <a class="link" href="https://zh.wikipedia.org/wiki/Bcrypt">https://zh.wikipedia.org/wiki/Bcrypt <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1><span id="bcrypt基本介绍">bcrypt基本介绍</span></h1><p>其实简单来说<br><code>bcrypt</code>就是一种加盐的单向Hash，不可逆的加密算法，同一种明文（plaintext），每次加密后的密文都不一样，而且不可反向破解生成明文，破解难度很大<br>而我们熟知的另一种不可逆的加密算法<br><code>md5</code> 是不加盐的单向Hash，不可逆的加密算法，同一个密码经过hash的时候生成的是同一个hash值，在大多数的情况下，有些经过md5加密的方法将会被破解。</p>
+<p>Bcrypt生成的密文是60位的。而MD5的是32位的。<br>总的来说，BCrypt比MD5更安全，但加密更慢。<br>各有优缺点吧。</p>
+<p>这里推荐个网站可以完成 bcrypt的加密 我们来尝尝鲜。</p>
+<p><a class="link" href="https://www.bejson.com/encrypt/bcrpyt_encode/">https://www.bejson.com/encrypt/bcrpyt_encode/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1><span id="安装">安装</span></h1><p>这里找遍了全网好像也没找到github地址。并且也没有什么安装的教程。</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">go</span> get -u golang.org/x/crypto/bcrypt<br></code></pre></td></tr></table></figure></div>
+
+<h1><span id="cost常量分类">cost常量分类</span></h1><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang"><span class="hljs-keyword">const</span> (<br>        <span class="hljs-comment">// 传递给GenerateFromPassword的最小允许开销</span><br> MinCost     <span class="hljs-type">int</span> = <span class="hljs-number">4</span>  <br>        <span class="hljs-comment">// 传递给GenerateFromPassword的最大允许开销</span><br> MaxCost     <span class="hljs-type">int</span> = <span class="hljs-number">31</span><br>        <span class="hljs-comment">// 如果将低于MinCost的cost传递给GenerateFromPassword，则实际设置的cost</span><br> DefaultCost <span class="hljs-type">int</span> = <span class="hljs-number">10</span> <br>)<br></code></pre></td></tr></table></figure></div>
+
+<h1><span id="使用">使用</span></h1><p>这里我们直接看官方写好的测试用例，可能需要 …(你懂的)<br><a class="link" href="https://cs.opensource.google/go/x/crypto/+/refs/tags/v0.8.0:bcrypt/bcrypt_test.go">https://cs.opensource.google/go/x/crypto/+/refs/tags/v0.8.0:bcrypt/bcrypt_test.go <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2><span id="generatefrompassword-生成一个hash密码">GenerateFromPassword 生成一个hash密码</span></h2><p>GenerateFromPassword以给定的代价返回密码的bcrypt散列。如果给定的cost小于MinCost，则该cost将被设置为DefaultCost。<br>GenerateFromPassword不接受长度超过72字节的密码，这是bcrypt操作的最长密码</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">password, _ := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>), bcrypt.DefaultCost)<br>fmt.Println(<span class="hljs-type">string</span>(password))<br></code></pre></td></tr></table></figure></div>
+<p>结果如下<br>第一次</p>
+<blockquote>
+<p>$2a$10$SNRLHrG.ExJHKfR8LihSLOqAJOu&#x2F;hCpP0ARhwoKvsduxv5xMXkl4u<br>第二次<br>$2a$10$Np1EBVQ9DZXMvIUkT7Y2P.cA0psEmW2SAVJYcCDqDDN8TsASo7aZm</p>
+</blockquote>
+<p><strong>注： 每次结果都不一样 因为这不是MD5加密，会通过加盐来完成不可逆的加密</strong></p>
+<h2><span id="cost方法-返回给定的cost">Cost方法 返回给定的cost</span></h2><p>Cost返回用于创建给定散列密码的散列成本。将来，当密码系统的哈希成本需要增加以适应更大的计算能力时，这个功能允许人们确定需要更新哪些密码。<br>简单来说 返回上文的 bcrypt.DefaultCost</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">cost, _ := bcrypt.Cost([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;$2a$10$XgLBtSfJsrBd.liLOYWddOYWYWboBUAlKmivcSwq647C3vTNUOVMO&quot;</span>))<br>fmt.Println(cost)<br></code></pre></td></tr></table></figure></div>
+<p>结果如下</p>
+<blockquote>
+<p>10</p>
+</blockquote>
+<h2><span id="comparehashandpassword-对比明文密码和散列密码">CompareHashAndPassword 对比明文密码和散列密码</span></h2><p>CompareHashAndPassword，将返回的散列密码与其明文版本进行比较。</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><code class="hljs golang">password, _ := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>), bcrypt.DefaultCost)<br>fmt.Println(<span class="hljs-type">string</span>(password))<br><br><span class="hljs-comment">// 可以解析出上文</span><br>cost, _ := bcrypt.Cost([]<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;$2a$10$XgLBtSfJsrBd.liLOYWddOYWYWboBUAlKmivcSwq647C3vTNUOVMO&quot;</span>))<br>fmt.Println(cost)<br><br>err := bcrypt.CompareHashAndPassword(password, []<span class="hljs-type">byte</span>(<span class="hljs-string">&quot;123&quot;</span>))<br><span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br> fmt.Println(<span class="hljs-string">&quot;密码验证错误&quot;</span>, err)<br>&#125;<br>fmt.Println(<span class="hljs-string">&quot;密码验证成功&gt;&gt;&gt;&quot;</span>, <span class="hljs-literal">nil</span>)<br></code></pre></td></tr></table></figure></div>
+<p>结果</p>
+<blockquote>
+<p>$2a$10$ANuBn8FthHbgfYir4v65AOvdtqoR3xjZ0G8duN5ynH1Vm0h3yUF&#x2F;G<br>10<br>密码验证成功&gt;&gt;&gt; <nil></nil></p>
+</blockquote>
+<h1><span id="调用utils文件-集成版">调用utils文件 —— 集成版</span></h1><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> utils<br><br><span class="hljs-keyword">import</span> (<br> <span class="hljs-string">&quot;golang.org/x/crypto/bcrypt&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Encrypt</span><span class="hljs-params">(encryptText <span class="hljs-type">string</span>)</span></span> (<span class="hljs-type">string</span>, <span class="hljs-type">error</span>) &#123;<br> hashStr, err := bcrypt.GenerateFromPassword([]<span class="hljs-type">byte</span>(encryptText), bcrypt.DefaultCost)<br> <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> &#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, err<br> &#125;<br> <span class="hljs-keyword">return</span> <span class="hljs-type">string</span>(hashStr), err<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CompareHashAndPassword</span><span class="hljs-params">(hashPassword, Password <span class="hljs-type">string</span>)</span></span> <span class="hljs-type">bool</span> &#123;<br> err := bcrypt.CompareHashAndPassword([]<span class="hljs-type">byte</span>(hashPassword), []<span class="hljs-type">byte</span>(Password))<br><br> <span class="hljs-keyword">return</span> err == <span class="hljs-literal">nil</span><br>&#125;<br><br></code></pre></td></tr></table></figure></div>
+
+<h1><span id="bcrypt某些错误类型">bcrypt某些错误类型</span></h1><ul>
+<li><p>type HashVersionTooNewError byte</p>
+<blockquote>
+<p>使用 创建哈希时从 CompareHashAndPassword 返回的错误 比此实现更新的 bcrypt 算法。<br>func (hv HashVersionTooNewError) Error() string 调用error返回字符串</p>
+</blockquote>
+</li>
+<li><p>type InvalidCostError int</p>
+<blockquote>
+<p>类型 无效cost错误<br>func (ic InvalidCostError) Error() string 调用error返回字符串</p>
+</blockquote>
+</li>
+<li><p>type InvalidHashPrefixError byte</p>
+<blockquote>
+<p>类型无效哈希前缀错误<br>当哈希以“$”以外的内容开头时，从 CompareHashAndPassword 返回的错误<br>func (ih InvalidHashPrefixError) Error() string 调用error返回字符串</p>
+</blockquote>
+</li>
+</ul>
+]]></content>
       <categories>
-        <category>JS逆向</category>
+        <category>一日一库</category>
       </categories>
       <tags>
-        <tag>JSVMP</tag>
+        <tag>Golang</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>ubuntu安装anconda3</title>
+    <url>/2024/08/26/ubuntu%E5%AE%89%E8%A3%85anconda3/</url>
+    <content><![CDATA[<!--toc-->
+<hr>
+<h1><span id="ubuntu-安装anaconda3">ubuntu 安装anaconda3</span></h1><p>官网:<a class="link" href="https://www.anaconda.com/">https://www.anaconda.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>下载:<a class="link" href="https://www.anaconda.com/products/individual#Downloads">https://www.anaconda.com/products/individual#Downloads <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h2><span id="安装">安装</span></h2><p>输入以下命令执行所下载的安装程序：</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh<br><br>bash Anaconda3-2021.11-Linux-x86_64.sh<br></code></pre></td></tr></table></figure></div>
+<h2><span id="使用">使用</span></h2><p>为了下载库的时候速度更快，更换conda下载源为清华大学镜像</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/<br>conda config --set show_channel_urls yes<br></code></pre></td></tr></table></figure></div>
+<p>在 &#x2F;home&#x2F;xxx里面添加Anaconda-python路径</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ vim ~/.bashrc<br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/home/xxx/anaconda3/bin:<span class="hljs-variable">$PATH</span>&quot;</span>  <span class="hljs-comment">## 在zshrc添加路径，然后保存退出</span><br><br>$ <span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure></div>
+
+<p>然后在ubuntu 输入命令</p>
+<blockquote>
+<p>conda –version</p>
+</blockquote>
+<p><strong>建立虚拟环境</strong></p>
+<blockquote>
+<p>conda create -n test python&#x3D;3.9</p>
+</blockquote>
+<p><strong>激活 虚拟环境</strong></p>
+<blockquote>
+<p>conda activate test</p>
+</blockquote>
+<p><strong>在虚拟环境安装软件</strong></p>
+<blockquote>
+<p>conda install spyder</p>
+</blockquote>
+<p><strong>关闭虚拟环境</strong></p>
+<blockquote>
+<p>deactivate</p>
+</blockquote>
+<p><strong>移除环境</strong></p>
+<blockquote>
+<p>conda remove –name test –all</p>
+</blockquote>
+<p><strong>删除已经设定好默认镜像源，恢复原来的源</strong></p>
+<blockquote>
+<p>conda config –remove-key channels</p>
+</blockquote>
+<p><strong>列出当前所有的环境</strong></p>
+<blockquote>
+<p>conda env list</p>
+</blockquote>
+<p><strong>重置Base环境</strong></p>
+<blockquote>
+<p>conda install –revision 0</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>快速安装</category>
+      </categories>
   </entry>
   <entry>
     <title>Python加密解密算法</title>
@@ -877,54 +883,48 @@
       </tags>
   </entry>
   <entry>
-    <title>ubuntu安装anconda3</title>
-    <url>/2024/08/26/ubuntu%E5%AE%89%E8%A3%85anconda3/</url>
+    <title>JSVMP逆向流程——QQ音乐</title>
+    <url>/2024/08/23/QQ%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[
+<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="0cd6cfe9c209202cba0eb30b163c3830b091494bf4c156abdcba8167b2d44c9f">83e5631915b29311d4c3e64518d9116c9395bd0bf0663511fddd5e52bc0d8aa3e5bb18f4e03292ce901d25496b3c090e6234a36c8afa24646975318692b32b54510aa5eb10c57f0d1d138b1787cd44420ebab759e29d372cf2b4f3d7ea27a7ca146fd5d430a1a8dd7812ddb1042c132a5e64322e97f681db01bd05348f3713c9aa4580358160ee9c73174dddd339cc1e19e402ee3cf4ec9be94795e35af1886e223e9d85c63785a3e63509d7cd6610a570f0117f75257fa474e430c1ac5a4681b45d6ccbd354656c0780f89cda595ee744e6972217b239d19d029a3774fa63fa39ed3febfdb1df0201522ea3102744f14a1d3c4caacfd5bb25fbf6290ba52ae0a519ca4cbc9d1d93963231e8ef8f29301480d82d65fa340e90344409a5103c8b2394948a66a35a677e64768ee5fa166628802d862e61c14b422cda00714fabd7369f3e3420a5c107b7900b1c71f30c7397d733df16ab13b05032830a20c11f03568570739c8a3e0ee2ee7a659acb3155675952ee8da91abc196181c315083827ee5c979b6c8c5ce6e47afdcb4b6f7f64515d5e827a4396d71d6ff70543c6820ee0c6faa522080f6410d0b459ae8ea56ac574fb3d3fb5ef61e5fccaf034911b181690b5dd4f5717da40f38d47a9b6a875c0bb12b2b1ca888ffe031061c52d69f1abfc4e71ccf9c5866f7133c8431a68f5239d110c1cd7967c221b4675c04ad1be9e87f6d2d6c2f46f6812728b8638bff22090a575a87768082762d9c9cfb87341737a9b3a9fe1cb3e168be8c6da17e5b83478b999ede313a1edafc51e05675534ed8450e036d6ab9c758d0ec3691ee8533f373e6fe49b107378724e34873cf5f33c5acea7e26b0c6804c02c6c1eabfac14223d495d4f8ff11fd17eb67cf5a9ead3730ac53bb2afb9b2870e9c0dd6a61af9ad14e972eab815a1e13d2e377c46092b3fd7bd6eff4ad147d475a1dcca91243a325f2b064e8da6455909b40993bb6b505ccb55420750b8bccc7cbb2022bb48605fa1f2cdbcbd3a207e613f9e9e69ec0b61e082765ca8f78e1deca900d760e27696b2f131c75cdedf9a0664c1ee39ef6a36f046b49cf75fb45a38d8b3da49b4eb5696cb106d33313765fb5bf2052bbc3eb7460fdcb5a8d70532f6e91172ac9450dbe6c052e0a152ba7b33cb0fe5818795ffbdf2d721d43bbf2fc67db19ace627c1c6bf67ed774e87a1f9132c99784cce80da318871902f5cf544f5b4b8f5f5a8be4154a22afc443fc6df4b6e9b3113e8213f4ccef0861bb35d422446c05807b2d40dcc170993d1e9502261e95d2c107d4b820b5037ac68a0ffbc7fe15c0dc9cc540f05bf52a96e95139b6350020cd2ef04e3dbbff4a925081b5b87a8235473ec36bf6153eabf4accf348eda97db8baa7db283f8f638abd1714add57ca9eba57efd93317a67f375be738eef3ed95a3857776ef69046965cd5d7a157026280e9b3e45ad9b1c7a8f4be94b70cab853fd5f2ea816b169264c818ba899a0b580f7f31d1ba67041d6115501fa9a3c0e9c7d8e642379aa203226f3dd94d322469e274451e89bc390d75bf9ccf6103f11d82dac05f7101747713aafd28115e621e4a5cc919a2789f125d5bd35e8575f2fd01094a0fbc3066410bd018abf6a7ac787bc2828a05e2229f335bec1fce525e52b8a25d10dd08b21c426286b9287bbf04305974e7786b5f49f527633433f1711132b091e5f1632309d9e98013f00ad8ee83c52ec7a4a2ff9310deb59bfb3537ab0ad7e4ce08471122b6bba26f19d61f77797d7164dc926eaff62f9c7e327126468934060f056e287e6b387fe01360d7b85df0eb9f1e6283a213feca8111b7a807f893ec796b51bcdc29b3b8bba44a754d8b0457158c8dc6b342d65a596f3a177fc3859201c9185694953d0ae7d2f3051702e41460a8afb1daf014be6b91299737889ce9156fc5aa81c91cb75a72e5cee643e3c375919c4a24681c6d7b63564c27e081d2b0a9f1bde816c22742c1ac2b1e5d8eb6d68cbf12ca2dc9f5d14462506983a5608041aec4fe519cd8b7912c42098560f3afd18cb25ad424aefdc1359a0141caec73de05297255e66ab02eafcfd328afa1b56e78272a12701576bf5a430ee5e4bf050e9879d143ae7d922775aed32f73f63b4b951af40e29eb956cd44abf1c642e59ee10552605c43601bf1539ac10fa6a4be3765ca1cb71e09de147e484a909bd33b27832100271e7ed7d946ece8075d9a39d254a6348f2ce94eb306805cad32932e36a229fdfbd0ba7ad5cbd87c1cb6c42b108a10f2d8d43a5534a65f20744a0f20bdb07b39c68d70e7f37c0f1cd22d4a899d435a870326583d76690a1c413448cf43e699f57a84cbef67fd9d391b40dba6359afebff19c0e987dc97f38e105ad91302155a478c7048ffcf842c36d9d5f25d28315205d5f288e4e6848befd0496aebaaad53b24e9cb8797aaec8256d7881eaf1eeb8834b7e69ed080d7bcfb228538090a9f1f43313d3e9d54d0fac093700e9dd4eb966bbe918f8aa91ba25548104bdfa5e5cdd2d32e01400d4296bc61bf2609bce4885e232dd43868e6d36cbcd54caf2a67d731cca76df3c375ecc2fb2ebecfe3dc1e2bb8abf396880452cc0fe40e559e4e2a8c5d2f0a2ad4e15c657c7aee45126aaa03075c775a2356f3b1763d2ff32075802b7ae1accb41ead02b25798dd4fc26f09d3131d3506b7e316b6344035314f03bcf7ecca1c8c15aeea2a3942d1a4020b12175a584e2a3f2326d1c99197dbf5eeb6ca582c04cc9bb9435db2cbee6c617a0f0b79dc1b2667b70ff1c87e174ed3582edb5fdb7a1f356fa82a0de6afca490e311c922031a0a7dd6bd2d486c9be1af0bea2df04759dc556db5730f2955a8ef6343990b1bc550a37d41c4d2ec27023ee80498eb1bd3d78fd0ad033575ee7ea174e2ed018f93a05951c6662e32f195c6034b08c07e8d7b3e9ac65d8edc09d27c788f2a4a780da3226288ce5c51c957be1cde566856263d1c64db6950eb0e8a0395ce7d9bc694782d74aa11960f793904bfa7372963536ef000dd915bf5f4f7dec47ae1c2729b45735fe2c23e10070ec5e539c79e40afac3a29eb3953840e909dca15d07fe46ad1cce28b1171eabd463c47ea15fa95deefca72ba68f07a0a184c56b9135824f9acf5bc18d1f3b964505b4c033b976b31cc8f4c83e14ef5cb730b130d3c67357998beccaaf2fc552e6f15c51d1877016a5ea61d8cb62fdf1b1676df5f88cdfed39c3630e782324d6507e966e51928b77f8abcd6ef033a950d9e4553dc7969e399972ac07e6663bcf33d5b0c0038de2de1a3071fd205e162852cc64f1381654cc44786c3724ac96addb6b2b33c05a96e085427c5ae75c82a659e89aa342b049c60e179e521c92c717e356654bc6458da0090ad19a1c187fbe9d87e79427d425687e24d28a5098d47a1cdb50cd597783b57af2378f54b224a1570573f6cb6c8dc567b10263298a64294dc1929aa6fd02222795e6ee44de12d305e0e9a380259f6f23ce1c43f25c063bf0f35d214e5c89407f0e944b1046636877bf3bb1db9370179ad407057da860452b7975a73ebb598fe2c325ba208da17ac0d770179a996332e41d5bb3a77bfee722d34257c7bee7cd85db10853ffe1e1bf638a63bc0ae12c738fdf564c7e37cc85d6452b138383b093a48c27b2c637a8ecd7e51a006e127fe78eee110d64dbd18cdd5e332ff466c6b74def3e71327160a1d30f2c5fc714be522be7adabcd3cb681b10a06ceedd2f522f93a64c8ffad9bddb3fe7ab7d93d955a74cd7991fa2545c84a88c41b6ec5b37f45f484760b1ebdcb2acaf8262bd45dc074d3bd93df464c6bf728a1e23bb27d8e3e4d56813f0f406b322072fbadfa031ca6deae949fd39f2c991d386c3c4acbb1ae840581e3417577688f8b3ca863ec390d3de25415f9386105d80883e5c7b62f4950054c35a245c7f568f0579c331c74b22658649a9e475423b48ab30eca8f86d0ddc5392daef6e31e0131a31078244790a9a1df315f98caced386900c0e2e1830bde9a85c3c2820eaa6e40dcd97442b92f6764aaeec3af27356d791f712ce0c28e258f6847d1a7a7400def966468c3d2184f8d51c175cd6063d3f6cf8553c0ea9fb650f8d8294f140d73f0b949d50dcd99f2f1a0f97c899162f6f89d2b6a5766be6bbb392ec940a3f48815f638ed197c2119fe7ac44a53aa1ecb54ffa27d99814c943ba3794165b25a0d70fa84314d0a03c111f04539eaaf50eb18e5c5e13dc403b7cc1ff709366028901ee09258a246ad06279776807ed8946a5897643166324581731447538a1ee0204a75cb9d7f6dcc6ccceda302de78cd11ca65796f96cb2068ce8c8445ffa36ba82b04fdb1577a4b44e3790ab589563871451b9beef7b8717031d64a3eb2861b3343dbc4005534917862163b238d527d968fe198108027b125caad443d43c16846c35601556c5962f0593fa442f0d2cc46a42a7c4850bc3cea487ee1aeeff1ae5c7fe0e9ea7faf46242cd19b75f831279bb63ce8d1346a422ed9489d1413550f6c56e903dbcb7732efbcad2d01178c8b93996088c9ced29eec1f17f4149f07679ae58b817f7adf7438a4052f9c6045bae0293eccb4b5cdd7c9a4287107b237f2607468e6b86ce472ce1d3af0220f5cdbbfef59588d464f7266b9b4b01f86cdeb28266a8e3243205cab3ad44bf66493d9530fb6249bff66680024fce4a52b12c1d92d8f43f4bfd15d5e0dd345605de9978d7318586aded11e1cdaa541a0a1072042df9024b2c74f69c1fc8db3abace33f2917e055748221557a4ded55551cd5083a79c2e944c1b00d93d00ea7b69231f32bb03d704891ec70313366c4341cc55af09d3dd530e39c55e8a7b55bb6b67bd4e7a0a85b2d15f0770d3974aeb64f02c0dc79246d2aa96974e919eea263f55aba1437528b5d6111716dd9818d07484121a48394a0ee808621f0bce75c79f7cf25fc7a96941609ae9b0f2789eeebdbc808ef46fc4ae44d89b42a758c5c35e39ddd08ca46d071946874ce91bf23ba68c5fc415f8930032e9270212e7305882120d3af1fc6d639fc48d970fb3f41a28d957c76c76b37a209f363baa953ebd852b7aa0390143f17514a1f89ccf36fb5d2cc592d8680745f157886edf1686ebf8758c8132bf8cbd7996b56d7a70d83ad6a4ff283e96521a240921b8038e6e15dad59836ec900ad8e52f35397aca92850b7b3d1b2ba712078d962b436cb674e50383f26d51fe3736945aca292876d6a21991a7c26cce28ae837a372127cb68b56378ea348dd90701d19fac32dad74b404d6dea93ecda6c5084537c6928aea40e7379abc8891c1d95bdc02126ce80e49a49073bea9a35c9176ecad26ad6285ad187be5fe4327cd12414f43839dbb792937411c8e272bb108ce79991bbc80c30ac05d4c7adca82b0e1613a9cc99fbf3465094e80dbea01ba471f8fd87677018ca30ed2daa13b8f4e612853be5a06db8171be207766054ba000c66af5464f5f086ffdf839a7a885597116275be0d0fb8dffb7c92c127ecb92b385e036efe9cd023489a580721e952fa41b7591a82f12cce6371b4575b572e229301b54aec9a440efb56de123ff216d16295eaeb82855c6ac38fb573230032dd80fd32381aca628d49c976ba7e6c0176ca1dd805b1b546e2d5005e31f3483f05b7aeb21e6a9b3a519ac4c1439a94a1f2820860f029d17df7</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">Hey, password is required here.</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>JS逆向</category>
+      </categories>
+      <tags>
+        <tag>JSVMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu下安装redis并且设置远程登陆和密码</title>
+    <url>/2024/08/26/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E5%92%8C%E5%AF%86%E7%A0%81/</url>
     <content><![CDATA[<!--toc-->
 <hr>
-<h1><span id="ubuntu-安装anaconda3">ubuntu 安装anaconda3</span></h1><p>官网:<a class="link" href="https://www.anaconda.com/">https://www.anaconda.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>下载:<a class="link" href="https://www.anaconda.com/products/individual#Downloads">https://www.anaconda.com/products/individual#Downloads <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h2><span id="安装">安装</span></h2><p>输入以下命令执行所下载的安装程序：</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">wget https://repo.anaconda.com/archive/Anaconda3-2021.11-Linux-x86_64.sh<br><br>bash Anaconda3-2021.11-Linux-x86_64.sh<br></code></pre></td></tr></table></figure></div>
-<h2><span id="使用">使用</span></h2><p>为了下载库的时候速度更快，更换conda下载源为清华大学镜像</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><code class="hljs plaintext">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/<br>conda config --set show_channel_urls yes<br></code></pre></td></tr></table></figure></div>
-<p>在 &#x2F;home&#x2F;xxx里面添加Anaconda-python路径</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><code class="hljs bash">$ vim ~/.bashrc<br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;/home/xxx/anaconda3/bin:<span class="hljs-variable">$PATH</span>&quot;</span>  <span class="hljs-comment">## 在zshrc添加路径，然后保存退出</span><br><br>$ <span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure></div>
-
-<p>然后在ubuntu 输入命令</p>
-<blockquote>
-<p>conda –version</p>
+<h1><span id="安装redis">安装redis</span></h1><blockquote>
+<p>sudo apt-get install -y redis-server</p>
 </blockquote>
-<p><strong>建立虚拟环境</strong></p>
-<blockquote>
-<p>conda create -n test python&#x3D;3.9</p>
+<h1><span id="更改配置">更改配置</span></h1><blockquote>
+<p>sudo vim &#x2F;etc&#x2F;redis&#x2F;redis.conf</p>
 </blockquote>
-<p><strong>激活 虚拟环境</strong></p>
-<blockquote>
-<p>conda activate test</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/XThu9WoMF1INzCJ.png"><br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/wGmL1tdIK6EhqWQ.png"><br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/zRoObl6vKPq1riC.png"></p>
+<p>如果不知道怎么找<br>直接在命令行模式下输入<br>&#x2F;{你要搜索的东西} 然后按回车 然后按n是下一个 N是上一个</p>
+<h1><span id="重启服务">重启服务</span></h1><blockquote>
+<p>systemctl restart redis-server.service</p>
 </blockquote>
-<p><strong>在虚拟环境安装软件</strong></p>
-<blockquote>
-<p>conda install spyder</p>
-</blockquote>
-<p><strong>关闭虚拟环境</strong></p>
-<blockquote>
-<p>deactivate</p>
-</blockquote>
-<p><strong>移除环境</strong></p>
-<blockquote>
-<p>conda remove –name test –all</p>
-</blockquote>
-<p><strong>删除已经设定好默认镜像源，恢复原来的源</strong></p>
-<blockquote>
-<p>conda config –remove-key channels</p>
-</blockquote>
-<p><strong>列出当前所有的环境</strong></p>
-<blockquote>
-<p>conda env list</p>
-</blockquote>
-<p><strong>重置Base环境</strong></p>
-<blockquote>
-<p>conda install –revision 0</p>
-</blockquote>
+<h1><span id="远程连接">远程连接</span></h1><p>使用远程工具 Redis Desktop Manager<br>下载地址<br>官网: <a class="link" href="https://resp.app/pricing">https://resp.app/pricing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>百度网盘：<a class="link" href="https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g">https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>提取码：00c0</p>
+<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/lynw3ZIqLeWk8g9.png"></p>
+<p><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/hziQdgPOETZaojN.png"><br>然后测试连接<br><img lazyload src="/images/loading.svg" data-src="https://s2.loli.net/2024/08/26/mHoUBhuOxEz5W1e.png"></p>
+<p>代表成功</p>
 ]]></content>
       <categories>
         <category>快速安装</category>
