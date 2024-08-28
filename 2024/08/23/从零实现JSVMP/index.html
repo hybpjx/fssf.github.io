@@ -18,15 +18,15 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="从零JSVMPJSCode ——&gt; Ast——&gt; 指令 ——&gt; 执行指令 简单的解释器1console.log(2*5+8)   2*5 10+8 console.log(18)  mul 2,5 add 10,8 print 18 栈的形式   push 2 push 5 mul push 8 add print   **栈： 先进后出 **   push mul add">
+        <meta name="description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从零实现JSVMP">
 <meta property="og:url" content="http://zichliang.top/2024/08/23/%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0JSVMP/index.html">
 <meta property="og:site_name" content="始識’s 博客">
-<meta property="og:description" content="从零JSVMPJSCode ——&gt; Ast——&gt; 指令 ——&gt; 执行指令 简单的解释器1console.log(2*5+8)   2*5 10+8 console.log(18)  mul 2,5 add 10,8 print 18 栈的形式   push 2 push 5 mul push 8 add print   **栈： 先进后出 **   push mul add">
+<meta property="og:description" content="这里有东西被加密了，需要输入密码查看哦。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-23T14:48:22.000Z">
-<meta property="article:modified_time" content="2024-08-26T09:30:12.146Z">
+<meta property="article:modified_time" content="2024-08-28T23:30:04.578Z">
 <meta property="article:author" content="hybpjx">
 <meta property="article:tag" content="JSVMP">
 <meta name="twitter:card" content="summary">
@@ -90,7 +90,7 @@
 
     <script id="hexo-configurations">
     window.config = {"hostname":"zichliang.top","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":false,"recommendation":{"enable":false,"title":"文章推荐","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"流转の日常纪录","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"http://github.com/hybpjx","zhihu":"https://www.zhihu.com/people/liu-zhuan-i","email":"hybpjx@163.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://zichliang.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/hybpjx","Blog":"https://zichliang.top/","Friends":"/friends"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/8/22 11:45:14"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":false,"recommendation":{"enable":false,"title":"文章推荐","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"流转の日常纪录","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"http://github.com/hybpjx","weixin":"https://mp.weixin.qq.com/s/U1F7nCYSaeuNY5YLxWFOGg","zhihu":"https://www.zhihu.com/people/liu-zhuan-i","bilibili":"https://space.bilibili.com/481309876","weibo":"https://weibo.com/5868422298","email":"hybpjx@163.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://zichliang.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"我":"/about","个人博客":"https://cnblogs.com/zichliang","Friends":"/friends"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/8/22 11:45:14"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -371,19 +371,13 @@
                                         
                                             <li>
                                                 <a href="/about">
-                                                    ME
+                                                    我
                                                 </a>
                                             </li>
                                         
                                             <li>
-                                                <a target="_blank" rel="noopener" href="https://github.com/hybpjx">
-                                                    GITHUB
-                                                </a>
-                                            </li>
-                                        
-                                            <li>
-                                                <a href="https://zichliang.top/">
-                                                    BLOG
+                                                <a target="_blank" rel="noopener" href="https://cnblogs.com/zichliang">
+                                                    个人博客
                                                 </a>
                                             </li>
                                         
@@ -503,17 +497,12 @@
                                 
                                     <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
                                         <a class=" text-third-text-color text-xl"
-                                           href="/about">ME</a>
+                                           href="/about">我</a>
                                     </div>
                                 
                                     <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
                                         <a class=" text-third-text-color text-xl"
-                                           target="_blank" rel="noopener" href="https://github.com/hybpjx">GITHUB</a>
-                                    </div>
-                                
-                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
-                                        <a class=" text-third-text-color text-xl"
-                                           href="https://zichliang.top/">BLOG</a>
+                                           target="_blank" rel="noopener" href="https://cnblogs.com/zichliang">个人博客</a>
                                     </div>
                                 
                                     <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
@@ -626,8 +615,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2024-08-26 17:30:12</span>
-            <span class="mobile">2024-08-26 17:30:12</span>
+            <span class="desktop">2024-08-29 07:30:04</span>
+            <span class="mobile">2024-08-29 07:30:04</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -649,7 +638,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>102 字</span>
+            <i class="fa-regular fa-typewriter"></i>&nbsp;<span>10 字</span>
         </span>
     
     
@@ -673,43 +662,19 @@
 
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
-            <!--toc-->
-<hr>
-<h1 id="从零JSVMP"><a href="#从零JSVMP" class="headerlink" title="从零JSVMP"></a>从零JSVMP</h1><p>JSCode ——&gt; Ast——&gt; 指令 ——&gt; 执行指令</p>
-<h1 id="简单的解释器"><a href="#简单的解释器" class="headerlink" title="简单的解释器"></a>简单的解释器</h1><div class="highlight-container" data-rel="Javascript"><figure class="iseeu highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">2</span>*<span class="hljs-number">5</span>+<span class="hljs-number">8</span>)<br></code></pre></td></tr></table></figure></div>
-
-<ol>
-<li>2*5</li>
-<li>10+8</li>
-<li>console.log(18)</li>
-</ol>
-<p>mul 2,5</p>
-<p>add 10,8</p>
-<p>print 18</p>
-<p><strong>栈的形式</strong></p>
-<blockquote>
-<ol>
-<li>push 2</li>
-<li>push 5</li>
-<li>mul</li>
-<li>push 8</li>
-<li>add</li>
-<li>print</li>
-</ol>
-</blockquote>
-<p>**栈： 先进后出 **</p>
-<blockquote>
-<ol>
-<li>push</li>
-<li>mul</li>
-<li>add</li>
-<li>print</li>
-</ol>
-</blockquote>
-<p>得到指令集 &gt; [1,2,1,5,2,1,8,3,4]</p>
-<p>2*5*8+2*3</p>
-<p>得到指令集 &gt;  [1,2,1,5,2,1,8,2,1,2,1,3,2,3,4]</p>
-
+            
+<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="aa800e8729014e3d5d04bfec57f6fa35824bb4ace8f4b91bc0aacf1c8756709a">83e5631915b29311d4c3e64518d9116c9395bd0bf0663511fddd5e52bc0d8aa3e5bb18f4e03292ce901d25496b3c090e6234a36c8afa24646975318692b32b54510aa5eb10c57f0d1d138b1787cd44420e579c912f84de5dc5668bf732c4b7f26a5e4f72fce54b0d486fe332c4c046eec00642d3cc501ddacf3ecdab1265bad4f401ed8d5a21e61ecf7278843e0bc737a638402b313dbf7538b1590c9955240b6ed6fd66dd0034553ee5a83443df11e84c09cb76534479cd3539b12f7070d7abb77c5aaa39d27fc1b42efbfd1b4991b9c4801d5a2062afed0119afd4cbc8d87dd9924b19ac6a4704adb19c0738ff68838836f274a39b02f76d95c21b59cc707db4f741025469fb14b23895eb38c62b7786467535d1b3295c8222d33b29ba38e289dd456e002a8bd964f390e8b4632ed90488f3d1d53597b0f41ecf6ea24635b285a94b9497a26a75290a8e9eb1f2fbcd0e8b4570ead85ad37b9fed2f13cd35bce77876bd65dc614736448b00cc38e4103a9504d304b28a48fb41889d15845a0b7da22172ead2b71da3dcba36165cd7988c6e978d1a2c17f78e75d2ec7f1b16b85790bfae75847d9638c5aa0fa92c1fa8878995e23f7ff9fa6979585d2a646c20b77a7090d7719545354c06eeb5c3fb0bc3751858ab788200a6cf04d2fee25bbfc02c2824633416bef0f8eec2a056c1192f0d4ac8244309f0b6f8deb3c930efbbe7be606f5b4c910de965c4c569b6b3d0bdefaf0bf3936ab0c8716bc8b002624e9ec366a81b2f919b03b1009fcbc5097951c8a41ff272bef470018c66dd60001034b117fb032e34da80156d2a10dad78594172d402f695188104cc697a9bb998c80f33d09db604aa4bfc844c30ab7c0c687b1c6281a82a99e5f217bc2fdc6f18709e8e9a30070f2e62818343e36411f356600daf5a7b26f9f3cc222a997a8483191daa222b720b8ec07dc390892990ea205e97c214594a57d44499ba7f6a056c49c64d172e3bb8c0475755559d9a21a3ee3ba487b81d39a525dce1f212a18c2fd316727c73e518f28ed801fd0b1ce760f4465e698e9318e679ecc7b6f378427e86ccee69351607fe8001bbd780151a529b1fb82547dbc412b7c210042a39acabab143d7355d9b802f8c3a8e9f1607c4f99b752d6dbe4b65c5fea976ffccd3797311f4a9320f5c955904e6b26bd8aefda6996df22853088136341cafbdf1850c9f26839774079b7b2d016dd9fb19bce523234060dab10a39f59735bb96ffd097b78a67477f83213c2c7b2d6076ab5dfc2bf13e4bc556a2fa3a82d8ad67f8841dad0dc7a1dd144f36bf3f74c099a7ee9a5a99e57ad7b7b23c4d5173b1af5840ade5256a004a743b642f3b91978c74c68993bc701345f2c02f18a2ff7edb0f9f615727abaca2fd11fee28d0d57cb404191d6e9a53fe8e3e51048ae476b698d5d5818f2d1d80f9f10df5a54138453741201fda7fbbaa5d2c23afb7f2b86d44d82a329918813222bd6c1369efc1d45243445b42566c5a1740b65d2c75df064fff380ac36f35f06cc1c0b74cc222aeab7cbbff2465384db56f831243fdf5892804323f7ff8168ee4990804b12f314d6e8df5da94a43b8660fd6fd038fc12d3b781524ad2dc494519d40b849ad15d72c1490c143074553fb932450e888c203f9352c0c112ed8ffb89cc38f1bcc2280277cb61e79a416c89a1d96943da78fceabea319fc48328acb22248185f26d1940670abc95ec75e8f7caba0bfdeed0837a57588d960d5d8ed638fd8956182c083fff94b0caa2d9afb405b796e4a614fce42265db41a35fbe36d7e17984048f9c0fb7c22f5a3ea29247d54fb299bd307be396235ce59620b780745d688889a6493df89ec2c6f1112291f1c523da2a8de9ec3f09c52e555ea8f4a56446b4ed02700b5999bb554e87458eecd2adc170a6f4175b124605b86ebc31b8c2cfbb29f0a860e6b09db82fb1e23c287e1fde995bd22ca76e198ff9278b1000241de060e3fedff8ca2b6c38f856b136b8e638dfb663c71a21f8032e031fd502a9018c644fd140cced0860ac63bee85ad771ff64af2e04c9fd145f661c995122df93e675208713d4a628b333ddab1cfcd4be102f51c9529ec26ab9b10b94cb88c3165011d61429630a5a1ca62a49fa357a10e483521a4819d293db72d0b33b205678aefdab2b00cdd5a252d3734df0e95c9a10eac647dd87cb702e619b015e565bf643c788fcf4420b0130d0c6ef31b63de6206f2973e89ad26311922d3110b0e1c8aafe4352f872b9d84b95791b3380c5eebebf5a4d752e3bdde0a020452c48f99c0452f4654723e770501a61d3bff6e92b8003d70b45959cf515b3a7deb113677d744c8855a806da9bbb58d6c736d6631d1054bdb8599023a9570d2c7823773aca3441394327f4a92cd6f1b3970260861c23e96d2d0428d1cd4f0375c8050d836bd9ad7365e20ff783bc7fd74e374c74155f3baf293e898a26b45c59ece528f6404d1a47d657725d17ff6559066d0be40808cd6035b496541b66ad6243c4b3221d464baf0309ecfd16db4485a8228f3522221a027c63d990a41850be46a98330e0eac467b6bf1d546b61154e430d7a1e403b5fcff8691f82297dcdff6502526b3d698dabdae8945afc9dfb914d4d7a4bc64127abe96a561be8f9e461f50da013d728f12612ab59f2d27caf4b892428c018e7fdf34b601fb8243b24ad8b01ab63e32b4a65ece3a30d526a57a823fb69ed41b9fc210d95851e50a890e8bc1acf337eec717da6a17201a1baacee849066194102289df0af0ad15b806b6dc1631632573f013069ba01eb64a5c5c42bd9de853b20635436afa9b189c09dfc853e21b1120d3f4858c4126e3d3b24f4fd4051a6e09d2ccdb6967949901b621b18e485a11f7771798600877ebf6c54b4135999de21aafd61c5d3e0e222e760b75ee1be00711f4dec89317eeefd6cb3714bf4fdddb0ef525e75225e1cb5d51f2f149e475c58ce5b0f36df20ca44e2128fa718fdec90fa4bbbe0528dcbd5b77daf286d89a201b64ff2b7d6818de1ab689c712bf7776c0ab04cf1c7228a9f9f59e46d90c43b6f3c53f12fe0bad0499b86c4810950d6b7eedaf2c473c24f27c14d7ffa4b7aa001ac20437a7bec537a4b5ec5cd503d6958f4ef89dc35ee0c611a9777649032f4c30ffee0074a972c2a745efa60006d0b35e3ebf8baf733fe059ce45eaa133d1618f2c66f20b7e3349a834b04246ee9dff457bc0fe3de2e22b0ed5f5b8eab1bd00588412f81245ed768acaf869e0f2cfdadc22c520a4e6ada47c0412b6844c34843deba62543e6007aabd78960f12e168943ba7f60824ce6fbaae740ecd0722b5204c5e8a7c43a4211c820bef7cd86e9c5c921357f11029948868f67817124ecddaecce2b8d781524ec05b59a6960aaed2102969a1fb2be6c7305b680efdb84a3aa7394a8de78ed6800cbe8288487c7ed77d77012799212f0d4920ea42e67dbc27225870ba0aae4c58128ef4f07cff3152926a97a717a79fb8b5856ba0256b7019c0f6a4fdd926385c2427a3609314c61b1b56db766c3d28e376522acc1f478c60738f5151dd3d49fda9a772eb46af174fe34b4939b092518794009ace9cfab0652f02bf81d8dbdb2c200f50601ad37ca36c76663e9f1223f625f94841b2afa6cd0eab63657e6413f4fe52d55aca8c2232efc0bdd7e8824fd4064ac9c9c88de1b23341da30530aa8a267e8aa0eeb8e2a5cf0565bf4777936442fb10df749fe673cfe5e06353dbf5091e51e8071e6adeee6532bedac864c0d55cd23922552e454da91ffefdf10290161add4c211aabbbac02588dc56304595e05ed6d88154db34405502f770b314d690fe7944524cafe2b6eb19344ba545abaf93ae3d7c2d34c6db2ea4fc8d3eb94b2c954e79b6fbc0dab9ddc3863846fead3f6695e7c70aec19ce7d55bb3c28dcd454cc0b495e7d639f0fe482f0bd056396790bc9bfddb8ed81bb512fdb6ee03cca1ca536a28e2b78684e619d729dbd4ef42c52ec6e0cb25c62514cccef5eb2659d526ef71c3cd57ebe0541ad09acd7ad2c5b4b91d7364df5bbaba90defec25c0a766a28b32b3eea2edd5e8bfbb81280a9d62c5048a018c4dd393489447d8769eccfd841adf4e085c0d10730deff09d2658aeac67a43e917e577159feb9bb3f3cbe95c9ce9809c2973fba03bf72fcd014be6f797bba331948843b67b10eb7319b32ab4e24ac2997c882c92ccdd8ec8cbe1f1a3cfb3e9b23f3776aeadea7e4fe37183efe7cdc5d2a504bbeedd997df28befb3a4b995043a1f17e5f7eee4334464f4975459a15a76b13858d5b6e34b97900914d1c25a04dd564225189e656852baa27640a42739df6be4079e801bb8a3acb29c58b7a1c3730f784fc5fb7c665a180cc426a438ea4bf4e15ca18dc891e81c36f47253326985b18b74ff22e99834f243212323270957d376448debca57c2012f9dc166bef10e9562eb877d3b9bbb6b31dfbf2534214efb9ce5edace5df52bf02656e5705f0a57ba933fd5c80aa30dc479a397b29259c51a382f817dd10fe65da27d1551b89588ae161350a69de05678878a346f66a06785b42c57e5e48b839d35d46ab2ae86784c210ada8db64d5c0b099db6d3159606e57731a85f4e048b3c8c94817a23f8d9774e9a7fc5e68081254a5e478282b1bbc14a6c9a27576ba89c16d9ce99459582cfced6ccb8afa2c195941c34861a4718d7ceba75f36d45f7666c9c9578feeba50923d0fec55e3cfa6b1d04bdc7448a2cbfd07f09261a60cd6c4ae1c2dd55a1213282fd55aa06af266c4cf3eef5ff98a370b5c4ac3556d6ed237c9d76a59f80c6b7e9e3b2ee2d821c48f2570539221158dd0f222acf365afd2e899a372feb16bf3b73d9daeb1128b71d69ade1b3f89ae189bb7c48c675a5082c2b5dd37194bf13a88f996f7441fe3b0eea1dcaa9ab0938561611698d866e854c944b2c814cdd3b4e9448f4c33f00d28134409c3cb85f6dd72e4055d73ac6137de78d0d84064dbc9bf8e84c8ad8ca0ab31c5347d1296a16ba932b9192b92ff87b13939ec696858a6ebde2d3dfa58030dc8045c03b3c970c2ec19bb8e0ae632307a47aba5d45af97a71ad0f1b9974d51675cba8750</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码哦。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
         </div>
 
         
@@ -723,7 +688,7 @@
         
             <li>
                 <strong>更新于
-                    :</strong> 2024-08-26 17:30:12
+                    :</strong> 2024-08-29 07:30:04
             </li>
         
         <li>
@@ -843,7 +808,7 @@
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
         <div class="page-title">从零实现JSVMP</div>
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E9%9B%B6JSVMP"><span class="nav-number">1.</span> <span class="nav-text">从零JSVMP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">简单的解释器</span></a></li></ol>
+        
 
     </div>
 </div>
@@ -880,7 +845,7 @@
                     </span>
                     
                         <span>
-                            共 24k 字
+                            共 23.9k 字
                         </span>
                     
                 </p>
