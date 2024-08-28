@@ -18,12 +18,12 @@
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="for循环 while 循环 do……while循环 for-in循环 for-of循环 map()循环 forEach循环 filter()过滤循环 JS实现Python中的zip循环 some()和every() some() 方法 every() 方法   reduce() 和 reduceRight() reduce() 方法 reduceRight() 方法       在Java">
+        <meta name="description" content="在Javascript中有很多种循环方式。有多种循环方式可以用来遍历数组、对象、以及执行一些重复性任务但是有很多方式甚至从未用过，所以简单来总结一下JS中的循环 for循环for 循环是在您希望创建循环时经常使用的工具。 例： 123for (let i &#x3D; 0; i &lt; 5; i++) &#123;    console.log(&#96;第$&#123;i + 1&#125;次循环遍历&#96;)&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常见的循环方式总结">
 <meta property="og:url" content="http://zichliang.top/2024/08/26/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BE%AA%E7%8E%AF%E6%96%B9%E5%BC%8F%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="始識’s 博客">
-<meta property="og:description" content="for循环 while 循环 do……while循环 for-in循环 for-of循环 map()循环 forEach循环 filter()过滤循环 JS实现Python中的zip循环 some()和every() some() 方法 every() 方法   reduce() 和 reduceRight() reduce() 方法 reduceRight() 方法       在Java">
+<meta property="og:description" content="在Javascript中有很多种循环方式。有多种循环方式可以用来遍历数组、对象、以及执行一些重复性任务但是有很多方式甚至从未用过，所以简单来总结一下JS中的循环 for循环for 循环是在您希望创建循环时经常使用的工具。 例： 123for (let i &#x3D; 0; i &lt; 5; i++) &#123;    console.log(&#96;第$&#123;i + 1&#125;次循环遍历&#96;)&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2024/08/26/aIXyfYNPknOws2b.png">
 <meta property="og:image" content="https://s2.loli.net/2024/08/26/WhvroJ96L1fxD3V.png">
@@ -104,7 +104,7 @@
 
     <script id="hexo-configurations">
     window.config = {"hostname":"zichliang.top","root":"/","language":"zh-CN","path":"search.xml"};
-    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":false,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":false,"recommendation":{"enable":false,"title":"文章推荐","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"流转の日常纪录","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"http://github.com/hybpjx","zhihu":"https://www.zhihu.com/people/liu-zhuan-i","email":"hybpjx@163.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://zichliang.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/hybpjx","Blog":"https://zichliang.top/","Friends":"/friends"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/8/22 11:45:14"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"3.2rem","h2":"2.4rem","h3":"1.9rem","h4":"1.6rem","h5":"1.4rem","h6":"1.3rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":true,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":false,"recommendation":{"enable":false,"title":"文章推荐","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":true,"percentage":true},"website_counter":{"url":"https://cn.vercount.one/js","enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/wallhaven-wqery6-light.webp","dark":"/images/wallhaven-wqery6-dark.webp"},"title":"流转の日常纪录","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":true,"style":"default","links":{"github":"http://github.com/hybpjx","zhihu":"https://www.zhihu.com/people/liu-zhuan-i","email":"hybpjx@163.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null,"lrc":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.4","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Status":{"path":"https://zichliang.top/","icon":"fa-regular fa-chart-bar"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/hybpjx","Blog":"https://zichliang.top/","Friends":"/friends"}}},"search":{"enable":true,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"show_on_mobile":true,"links":{"文章":{"path":"/archives","icon":"fa-regular fa-archive"},"标签":{"path":"/tags","icon":"fa-regular fa-tags"},"分类":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2024/8/22 11:45:14"};
     window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
     window.data = {"masonry":false};
   </script>
@@ -704,30 +704,6 @@
 
         <div class="article-content markdown-body px-2 sm:px-6 md:px-8 pb-8">
             <!-- toc -->
-
-<ul>
-<li><a href="#for%25E5%25BE%25AA%25E7%258E%25AF">for循环</a></li>
-<li><a href="#while-%25E5%25BE%25AA%25E7%258E%25AF">while 循环</a></li>
-<li><a href="#do%25E2%2580%25A6%25E2%2580%25A6while%25E5%25BE%25AA%25E7%258E%25AF">do……while循环</a></li>
-<li><a href="#for-in%25E5%25BE%25AA%25E7%258E%25AF">for-in循环</a></li>
-<li><a href="#for-of%25E5%25BE%25AA%25E7%258E%25AF">for-of循环</a></li>
-<li><a href="#map()%25E5%25BE%25AA%25E7%258E%25AF">map()循环</a></li>
-<li><a href="#forEach%25E5%25BE%25AA%25E7%258E%25AF">forEach循环</a></li>
-<li><a href="#filter()%25E8%25BF%2587%25E6%25BB%25A4%25E5%25BE%25AA%25E7%258E%25AF">filter()过滤循环</a></li>
-<li><a href="#JS%25E5%25AE%259E%25E7%258E%25B0Python%25E4%25B8%25AD%25E7%259A%2584zip%25E5%25BE%25AA%25E7%258E%25AF">JS实现Python中的zip循环</a></li>
-<li><a href="#some()%25E5%2592%258Cevery()">some()和every()</a><ul>
-<li><a href="#some()-%25E6%2596%25B9%25E6%25B3%2595">some() 方法</a></li>
-<li><a href="#every()-%25E6%2596%25B9%25E6%25B3%2595">every() 方法</a></li>
-</ul>
-</li>
-<li><a href="#reduce()-%25E5%2592%258C-reduceRight()">reduce() 和 reduceRight()</a><ul>
-<li><a href="#reduce()-%25E6%2596%25B9%25E6%25B3%2595">reduce() 方法</a></li>
-<li><a href="#reduceRight()-%25E6%2596%25B9%25E6%25B3%2595">reduceRight() 方法</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
 <hr>
 <p>在Javascript中有很多种循环方式。有多种循环方式可以用来遍历数组、对象、以及执行一些重复性任务<br>但是有很多方式甚至从未用过，所以简单来总结一下JS中的循环</p>
 <h1 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h1><p>for 循环是在您希望创建循环时经常使用的工具。</p>
@@ -982,7 +958,7 @@
                     </span>
                     
                         <span>
-                            共 24.9k 字
+                            共 24.3k 字
                         </span>
                     
                 </p>
