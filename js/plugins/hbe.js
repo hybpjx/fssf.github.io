@@ -219,7 +219,6 @@
         hideButton.addEventListener("click", () => {
           window.localStorage.removeItem(storageName);
           window.location.reload();
-          document.getElementById("hexo-blog-encrypt").style.display = "inline";
         });
 
         document.getElementById("hexo-blog-encrypt").style.display = "inline";
