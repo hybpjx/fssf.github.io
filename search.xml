@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>在ubuntu上安装golang</title>
+    <url>/2022/03/26/%E5%9C%A8ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85golang/</url>
+    <content><![CDATA[<!--toc-->
+<hr>
+<p><a class="link"   href="https://golang.google.cn/dl/" >https://golang.google.cn/dl/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h1><h2 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://golang.google.cn/dl/go1.19.linux-amd64.tar.gz</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://s2.loli.net/2024/08/26/gDPJvAlITqQGHC5.png"></p>
+<h2 id="解压到文件夹下"><a href="#解压到文件夹下" class="headerlink" title="解压到文件夹下"></a>解压到文件夹下</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">sudo tar -xvzf go1<span class="number">.19</span>.linux-amd64.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://s2.loli.net/2024/08/26/gDPJvAlITqQGHC5.png"></p>
+<h2 id="编译配置环境变量"><a href="#编译配置环境变量" class="headerlink" title="编译配置环境变量"></a>编译配置环境变量</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano ~/.bashrc</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=/home/zic/gopath</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/local/go</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br></pre></td></tr></table></figure></div>
+
+<p><img src="https://s2.loli.net/2024/08/26/vWKNQ3pZYO9ol6y.png"></p>
+<p>配置完毕之后<br>然后使用命令</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></div>
+
+<p>然后再终端中输入</p>
+<blockquote>
+<p>go version </p>
+</blockquote>
+<p><img src="https://s2.loli.net/2024/08/26/hcosbpRv5nIQe2F.png"></p>
+<h2 id="运行hello-world"><a href="#运行hello-world" class="headerlink" title="运行hello,world"></a>运行hello,world</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://s2.loli.net/2024/08/26/yhQINsl1dxrk2VF.png"></p>
+<h1 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h1><h2 id="通过apt-get安装"><a href="#通过apt-get安装" class="headerlink" title="通过apt-get安装"></a>通过apt-get安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install golang</span><br></pre></td></tr></table></figure></div>
+<h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=/home/zic/gopath</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/local/go</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br></pre></td></tr></table></figure></div>
+<p>其他步骤一模一样 只不过这个版本不可选而已</p>
+]]></content>
+      <categories>
+        <category>快速安装</category>
+      </categories>
+  </entry>
+  <entry>
     <title>ubuntu安装anconda3 与Miniconda</title>
     <url>/2022/03/15/ubuntu%E5%AE%89%E8%A3%85anconda3/</url>
     <content><![CDATA[<h1 id="ubuntu-安装anaconda3"><a href="#ubuntu-安装anaconda3" class="headerlink" title="ubuntu 安装anaconda3"></a>ubuntu 安装anaconda3</h1><p>官网:<a class="link"   href="https://www.anaconda.com/" >https://www.anaconda.com/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>下载:<a class="link"   href="https://www.anaconda.com/products/individual#Downloads" >https://www.anaconda.com/products/individual#Downloads <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>MiniAndonda:  <a class="link"   href="https://docs.anaconda.com/miniconda/" >https://docs.anaconda.com/miniconda/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
@@ -50,39 +83,6 @@
 <blockquote>
 <p>conda install –revision 0</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>快速安装</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>在ubuntu上安装golang</title>
-    <url>/2022/03/26/%E5%9C%A8ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85golang/</url>
-    <content><![CDATA[<!--toc-->
-<hr>
-<p><a class="link"   href="https://golang.google.cn/dl/" >https://golang.google.cn/dl/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h1 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h1><h2 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">wget https://golang.google.cn/dl/go1.19.linux-amd64.tar.gz</span><br></pre></td></tr></table></figure></div>
-<p><img src="https://s2.loli.net/2024/08/26/gDPJvAlITqQGHC5.png"></p>
-<h2 id="解压到文件夹下"><a href="#解压到文件夹下" class="headerlink" title="解压到文件夹下"></a>解压到文件夹下</h2><div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line">sudo tar -xvzf go1<span class="number">.19</span>.linux-amd64.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure></div>
-<p><img src="https://s2.loli.net/2024/08/26/gDPJvAlITqQGHC5.png"></p>
-<h2 id="编译配置环境变量"><a href="#编译配置环境变量" class="headerlink" title="编译配置环境变量"></a>编译配置环境变量</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nano ~/.bashrc</span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=/home/zic/gopath</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/local/go</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br></pre></td></tr></table></figure></div>
-
-<p><img src="https://s2.loli.net/2024/08/26/vWKNQ3pZYO9ol6y.png"></p>
-<p>配置完毕之后<br>然后使用命令</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure></div>
-
-<p>然后再终端中输入</p>
-<blockquote>
-<p>go version </p>
-</blockquote>
-<p><img src="https://s2.loli.net/2024/08/26/hcosbpRv5nIQe2F.png"></p>
-<h2 id="运行hello-world"><a href="#运行hello-world" class="headerlink" title="运行hello,world"></a>运行hello,world</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">go run main.go</span><br></pre></td></tr></table></figure></div>
-<p><img src="https://s2.loli.net/2024/08/26/yhQINsl1dxrk2VF.png"></p>
-<h1 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h1><h2 id="通过apt-get安装"><a href="#通过apt-get安装" class="headerlink" title="通过apt-get安装"></a>通过apt-get安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install golang</span><br></pre></td></tr></table></figure></div>
-<h1 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=/home/zic/gopath</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GOROOT=/usr/local/go</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br></pre></td></tr></table></figure></div>
-<p>其他步骤一模一样 只不过这个版本不可选而已</p>
 ]]></content>
       <categories>
         <category>快速安装</category>
@@ -194,6 +194,91 @@
       </categories>
   </entry>
   <entry>
+    <title>安装NVM与构建vue项目</title>
+    <url>/2022/05/26/%E5%AE%89%E8%A3%85NVM%E4%B8%8E%E6%9E%84%E5%BB%BAvue%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<!-- toc -->
+<hr>
+<h1 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h1><h2 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h2><p>去github 上下载 <a class="link"   href="https://github.com/coreybutler/nvm-windows" >https://github.com/coreybutler/nvm-windows <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>安装包地址： <a class="link"   href="https://github.com/coreybutler/nvm-windows/releases" >https://github.com/coreybutler/nvm-windows/releases <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br><img src="https://s2.loli.net/2024/08/26/WR9AbqNfsMw7juL.png"><br>直接下载安装即可。</p>
+<p>安装完了 持续下一步<br>进入目录中<br><img src="https://s2.loli.net/2024/08/26/OaKlCvAH39IGu42.png"></p>
+<p>然后修改settings中<br>添加如下内容</p>
+<div class="highlight-container" data-rel="Avrasm"><figure class="iseeu highlight avrasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">node_mirror:</span> https://npm.taobao<span class="meta">.org</span>/mirrors/node/</span><br><span class="line"><span class="symbol">npm_mirror:</span> https://npm.taobao<span class="meta">.org</span>/mirrors/npm/</span><br></pre></td></tr></table></figure></div>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>验证NVM是否安装成功<br><img src="https://s2.loli.net/2024/08/26/87RNqO9Mmlh61kj.png"><br>以上代表已经安装成功了。<br><img src="https://s2.loli.net/2024/08/26/1qJDrX6IRvxpU7u.png"></p>
+<h2 id="ubuntu-安装"><a href="#ubuntu-安装" class="headerlink" title="ubuntu 安装"></a>ubuntu 安装</h2><p><a class="link"   href="https://github.com/nvm-sh/nvm" >https://github.com/nvm-sh/nvm <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>执行如下命令即可。<br><img src="https://s2.loli.net/2024/08/26/FS7CDXsr8LuzQa1.png"></p>
+<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">curl -<span class="keyword">o</span>- https://raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">39.3</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">39.3</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="修改hosts"><a href="#修改hosts" class="headerlink" title="修改hosts"></a>修改hosts</h3><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo <span class="keyword">vim</span> /etc/hosts</span><br><span class="line"><span class="number">199.232</span>.<span class="number">96.133</span> raw.githubusercontent.<span class="keyword">com</span></span><br></pre></td></tr></table></figure></div>
+<h3 id="重启网卡"><a href="#重启网卡" class="headerlink" title="重启网卡"></a>重启网卡</h3><blockquote>
+<p>systemctl restart NetworkManager.service</p>
+</blockquote>
+<p>这样就算安装成功了</p>
+<h3 id="更换淘宝源"><a href="#更换淘宝源" class="headerlink" title="更换淘宝源"></a>更换淘宝源</h3><p>在安装nodejs的时候特别慢，安装了好久都安装不上去，网速实在是太慢了，需要将nvm的默认下载地址改为国内的，我使用了淘宝的镜像,在.bashrc文件中追加如下内容</p>
+<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">vim</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"># nvm淘宝镜像</span><br><span class="line">export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node</span><br></pre></td></tr></table></figure></div>
+
+
+<h1 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org </span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install v16.13.0</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="卸载node"><a href="#卸载node" class="headerlink" title="卸载node"></a>卸载node</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nvm uninstall v16.13.0</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="使用nvm"><a href="#使用nvm" class="headerlink" title="使用nvm"></a>使用nvm</h1><h2 id="使用-16-13-0"><a href="#使用-16-13-0" class="headerlink" title="使用 16.13.0"></a>使用 16.13.0</h2><blockquote>
+<p>nvm use v16.13.0</p>
+</blockquote>
+<p><strong>注意： 如果在windows下 要使用超级管理员 不然会出现错误</strong></p>
+<h2 id="查看安装环境"><a href="#查看安装环境" class="headerlink" title="查看安装环境"></a>查看安装环境</h2><blockquote>
+<p>nvm current<br>nvm list</p>
+</blockquote>
+<h2 id="更换默认环境"><a href="#更换默认环境" class="headerlink" title="更换默认环境"></a>更换默认环境</h2><blockquote>
+<p>nvm alias default v16.13.0</p>
+</blockquote>
+<h1 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h1><h2 id="安装源添加镜像"><a href="#安装源添加镜像" class="headerlink" title="安装源添加镜像"></a>安装源添加镜像</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">curl -sS https://<span class="keyword">dl</span>.yarnpkg.<span class="keyword">com</span>/debian/pubkey.gpg | sudo apt-key <span class="built_in">add</span> -</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo tee /etc/apt/sources.<span class="keyword">list</span>.d/yarn.<span class="keyword">list</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="更新源并且安装"><a href="#更新源并且安装" class="headerlink" title="更新源并且安装"></a>更新源并且安装</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span> &amp;&amp; sudo apt install yarn</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> <span class="built_in">remove</span> yarn</span><br><span class="line">sudo apt-<span class="built_in">get</span> autoremove</span><br></pre></td></tr></table></figure></div>
+<h2 id="添加淘宝源"><a href="#添加淘宝源" class="headerlink" title="添加淘宝源"></a>添加淘宝源</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org/</span><br></pre></td></tr></table></figure></div>
+
+<p>安装完毕 后 输入</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn -v </span><br></pre></td></tr></table></figure></div>
+
+<p><img src="https://s2.loli.net/2024/08/26/bkS6gd1snZyJzfm.png"><br>代表安装成功！！！</p>
+<h2 id="初始化一个yarn项目"><a href="#初始化一个yarn项目" class="headerlink" title="初始化一个yarn项目"></a>初始化一个yarn项目</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn init</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 速度不行可以考虑换源 npm</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"></span><br><span class="line">yarn add global @vue-cli</span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="常规安装"><a href="#常规安装" class="headerlink" title="常规安装"></a>常规安装</h2><blockquote>
+<p>vue create vueproject</p>
+</blockquote>
+<h1 id="vite"><a href="#vite" class="headerlink" title="vite"></a>vite</h1><h2 id="安装vite"><a href="#安装vite" class="headerlink" title="安装vite"></a>安装vite</h2><p>中文文档： <a class="link"   href="https://cn.vitejs.dev/guide/" >https://cn.vitejs.dev/guide/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>使用 NPM:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm create vite@latest</span><br></pre></td></tr></table></figure></div>
+<p>使用 Yarn:</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ yarn create vite</span><br></pre></td></tr></table></figure></div>
+
+<p>结果如下<br><img src="https://s2.loli.net/2024/08/26/dxMni1cpNw3TVZE.png"></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>然后使用vscode中的project manager 来对我们的项目进行管理<br><img src="https://s2.loli.net/2024/08/26/LFhB1V8M4XRrgJi.png"><br>然后修改project.json<br><img src="https://s2.loli.net/2024/08/26/2NQdc7WsVG5g8Bb.png"></p>
+<div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line"> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;kyfly_client&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;rootPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;E:\\Golang\\github.com\\hybpjx\\kyfly_client&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tags&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure></div>
+
+<p>执行yarn 命令 安装资源包</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://s2.loli.net/2024/08/26/Wr4ibtQ2YoM9eAq.png"></p>
+<p>然后执行yarn dev </p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn dev</span><br></pre></td></tr></table></figure></div>
+<p><img src="https://s2.loli.net/2024/08/26/WonxGITwkDpv4ys.png"><br><img src="https://s2.loli.net/2024/08/26/HXT1glJmraRy8LK.png"></p>
+<p>启动成功！！<br><img src="https://s2.loli.net/2024/08/26/Xz291aoQPh3VY7I.png"></p>
+<p>然后置空所有其他无用的东西<br><img src="https://s2.loli.net/2024/08/26/oiWUVlOQxmRkF5D.png"><br>效果如上图</p>
+]]></content>
+      <categories>
+        <category>快速安装</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Golang加密解密算法</title>
     <url>/2022/09/26/Golang%E5%8A%A0%E5%AF%86%E8%A7%A3%E5%AF%86%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<!-- toc -->
@@ -284,27 +369,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Gin_gorm时间格式化模型类重写</title>
-    <url>/2023/10/26/Gin-gorm%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%B1%BB%E9%87%8D%E5%86%99/</url>
-    <content><![CDATA[<!--toc-->
-<hr>
-<p>问题：</p>
-<blockquote>
-<p>在使用GORM中 如果我们使用到了CreateAt 和UpdateAt 就会发现 这个时间的类型是time.Time 而其数据是<br>“2022-10-13T10:14:02.973528+08:00” 这样的,<br>然而这样的数据你说能用确实能用 ，但是一旦写入数据库中就变成了<br>0001-01-01 00:00:00.000000 +00:00</p>
-</blockquote>
-<h1 id="重写数据类型"><a href="#重写数据类型" class="headerlink" title="重写数据类型"></a>重写数据类型</h1><p>话不多说 直接上代码<br>并且此代码通用【小弟也是copy学习视频上的】</p>
-<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;database/sql/driver&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timeFormat = <span class="string">&quot;2006-01-02 15:04:05&quot;</span></span><br><span class="line"><span class="keyword">const</span> timezone = <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Time time.Time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> MarshalJSON() ([]<span class="type">byte</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    b := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">0</span>, <span class="built_in">len</span>(timeFormat)+<span class="number">2</span>)</span><br><span class="line">    b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">    b = time.Time(t).AppendFormat(b, timeFormat)</span><br><span class="line">    b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> UnmarshalJSON(data []<span class="type">byte</span>) (err <span class="type">error</span>) &#123;</span><br><span class="line">    now, err := time.ParseInLocation(<span class="string">`&quot;`</span>+timeFormat+<span class="string">`&quot;`</span>, <span class="type">string</span>(data), time.Local)</span><br><span class="line">    *t = Time(now)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> String() <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> time.Time(t).Format(timeFormat)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> local() time.Time &#123;</span><br><span class="line">    loc, _ := time.LoadLocation(timezone)</span><br><span class="line">    <span class="keyword">return</span> time.Time(t).In(loc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> Value() (driver.Value, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> zeroTime time.Time</span><br><span class="line">    <span class="keyword">var</span> ti = time.Time(t)</span><br><span class="line">    <span class="keyword">if</span> ti.UnixNano() == zeroTime.UnixNano() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ti, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> Scan(v <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">    value, ok := v.(time.Time)</span><br><span class="line">    <span class="keyword">if</span> ok &#123;</span><br><span class="line">        *t = Time(value)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;can not convert %v to timestamp&quot;</span>, v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>至于调用就更简单了 如下代码所示</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Category <span class="keyword">struct</span> &#123;</span><br><span class="line"> <span class="comment">//*gorm.Model</span></span><br><span class="line"> ID       <span class="type">uint</span>      <span class="string">`json:&quot;id&quot; gorm:&quot;primary key&quot;`</span></span><br><span class="line"> Name     <span class="type">string</span>    <span class="string">`json:&quot;name&quot; gorm:&quot;type:varchar(50); not null;unique&quot;`</span></span><br><span class="line"> CreatedAt Time     <span class="string">`json:&quot;create_at&quot;`</span></span><br><span class="line"> UpdatedAt Time     <span class="string">`json:&quot;update_at&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-]]></content>
-      <categories>
-        <category>Gin速用</category>
-      </categories>
-      <tags>
-        <tag>Golang</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Gin_Resonse返回格式</title>
     <url>/2022/11/26/Gin-Resonse%E8%BF%94%E5%9B%9E%E6%A0%BC%E5%BC%8F/</url>
     <content><![CDATA[<!--toc-->
@@ -382,152 +446,21 @@
       </tags>
   </entry>
   <entry>
-    <title>安装NVM与构建vue项目</title>
-    <url>/2022/05/26/%E5%AE%89%E8%A3%85NVM%E4%B8%8E%E6%9E%84%E5%BB%BAvue%E9%A1%B9%E7%9B%AE/</url>
-    <content><![CDATA[<!-- toc -->
-<hr>
-<h1 id="安装nvm"><a href="#安装nvm" class="headerlink" title="安装nvm"></a>安装nvm</h1><h2 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h2><p>去github 上下载 <a class="link"   href="https://github.com/coreybutler/nvm-windows" >https://github.com/coreybutler/nvm-windows <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>安装包地址： <a class="link"   href="https://github.com/coreybutler/nvm-windows/releases" >https://github.com/coreybutler/nvm-windows/releases <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br><img src="https://s2.loli.net/2024/08/26/WR9AbqNfsMw7juL.png"><br>直接下载安装即可。</p>
-<p>安装完了 持续下一步<br>进入目录中<br><img src="https://s2.loli.net/2024/08/26/OaKlCvAH39IGu42.png"></p>
-<p>然后修改settings中<br>添加如下内容</p>
-<div class="highlight-container" data-rel="Avrasm"><figure class="iseeu highlight avrasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">node_mirror:</span> https://npm.taobao<span class="meta">.org</span>/mirrors/node/</span><br><span class="line"><span class="symbol">npm_mirror:</span> https://npm.taobao<span class="meta">.org</span>/mirrors/npm/</span><br></pre></td></tr></table></figure></div>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>验证NVM是否安装成功<br><img src="https://s2.loli.net/2024/08/26/87RNqO9Mmlh61kj.png"><br>以上代表已经安装成功了。<br><img src="https://s2.loli.net/2024/08/26/1qJDrX6IRvxpU7u.png"></p>
-<h2 id="ubuntu-安装"><a href="#ubuntu-安装" class="headerlink" title="ubuntu 安装"></a>ubuntu 安装</h2><p><a class="link"   href="https://github.com/nvm-sh/nvm" >https://github.com/nvm-sh/nvm <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>执行如下命令即可。<br><img src="https://s2.loli.net/2024/08/26/FS7CDXsr8LuzQa1.png"></p>
-<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">curl -<span class="keyword">o</span>- https://raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">39.3</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.<span class="keyword">com</span>/nvm-<span class="keyword">sh</span>/nvm/v0.<span class="number">39.3</span>/install.<span class="keyword">sh</span> | bash</span><br></pre></td></tr></table></figure></div>
-
-<h3 id="修改hosts"><a href="#修改hosts" class="headerlink" title="修改hosts"></a>修改hosts</h3><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo <span class="keyword">vim</span> /etc/hosts</span><br><span class="line"><span class="number">199.232</span>.<span class="number">96.133</span> raw.githubusercontent.<span class="keyword">com</span></span><br></pre></td></tr></table></figure></div>
-<h3 id="重启网卡"><a href="#重启网卡" class="headerlink" title="重启网卡"></a>重启网卡</h3><blockquote>
-<p>systemctl restart NetworkManager.service</p>
-</blockquote>
-<p>这样就算安装成功了</p>
-<h3 id="更换淘宝源"><a href="#更换淘宝源" class="headerlink" title="更换淘宝源"></a>更换淘宝源</h3><p>在安装nodejs的时候特别慢，安装了好久都安装不上去，网速实在是太慢了，需要将nvm的默认下载地址改为国内的，我使用了淘宝的镜像,在.bashrc文件中追加如下内容</p>
-<div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">vim</span> ~/.bashrc</span><br><span class="line"></span><br><span class="line"># nvm淘宝镜像</span><br><span class="line">export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node</span><br></pre></td></tr></table></figure></div>
-
-
-<h1 id="安装cnpm"><a href="#安装cnpm" class="headerlink" title="安装cnpm"></a>安装cnpm</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org </span><br></pre></td></tr></table></figure></div>
-
-
-
-<h1 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install v16.13.0</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="卸载node"><a href="#卸载node" class="headerlink" title="卸载node"></a>卸载node</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nvm uninstall v16.13.0</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="使用nvm"><a href="#使用nvm" class="headerlink" title="使用nvm"></a>使用nvm</h1><h2 id="使用-16-13-0"><a href="#使用-16-13-0" class="headerlink" title="使用 16.13.0"></a>使用 16.13.0</h2><blockquote>
-<p>nvm use v16.13.0</p>
-</blockquote>
-<p><strong>注意： 如果在windows下 要使用超级管理员 不然会出现错误</strong></p>
-<h2 id="查看安装环境"><a href="#查看安装环境" class="headerlink" title="查看安装环境"></a>查看安装环境</h2><blockquote>
-<p>nvm current<br>nvm list</p>
-</blockquote>
-<h2 id="更换默认环境"><a href="#更换默认环境" class="headerlink" title="更换默认环境"></a>更换默认环境</h2><blockquote>
-<p>nvm alias default v16.13.0</p>
-</blockquote>
-<h1 id="安装yarn"><a href="#安装yarn" class="headerlink" title="安装yarn"></a>安装yarn</h1><h2 id="安装源添加镜像"><a href="#安装源添加镜像" class="headerlink" title="安装源添加镜像"></a>安装源添加镜像</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">curl -sS https://<span class="keyword">dl</span>.yarnpkg.<span class="keyword">com</span>/debian/pubkey.gpg | sudo apt-key <span class="built_in">add</span> -</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;deb https://dl.yarnpkg.com/debian/ stable main&quot;</span> | sudo tee /etc/apt/sources.<span class="keyword">list</span>.d/yarn.<span class="keyword">list</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="更新源并且安装"><a href="#更新源并且安装" class="headerlink" title="更新源并且安装"></a>更新源并且安装</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt <span class="keyword">update</span> &amp;&amp; sudo apt install yarn</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><div class="highlight-container" data-rel="Vim"><figure class="iseeu highlight vim"><table><tr><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> <span class="built_in">remove</span> yarn</span><br><span class="line">sudo apt-<span class="built_in">get</span> autoremove</span><br></pre></td></tr></table></figure></div>
-<h2 id="添加淘宝源"><a href="#添加淘宝源" class="headerlink" title="添加淘宝源"></a>添加淘宝源</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry http://registry.npm.taobao.org/</span><br></pre></td></tr></table></figure></div>
-
-<p>安装完毕 后 输入</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn -v </span><br></pre></td></tr></table></figure></div>
-
-<p><img src="https://s2.loli.net/2024/08/26/bkS6gd1snZyJzfm.png"><br>代表安装成功！！！</p>
-<h2 id="初始化一个yarn项目"><a href="#初始化一个yarn项目" class="headerlink" title="初始化一个yarn项目"></a>初始化一个yarn项目</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn init</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="vue-cli"><a href="#vue-cli" class="headerlink" title="vue-cli"></a>vue-cli</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 速度不行可以考虑换源 npm</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"></span><br><span class="line">yarn add global @vue-cli</span><br></pre></td></tr></table></figure></div>
-
-
-<h2 id="常规安装"><a href="#常规安装" class="headerlink" title="常规安装"></a>常规安装</h2><blockquote>
-<p>vue create vueproject</p>
-</blockquote>
-<h1 id="vite"><a href="#vite" class="headerlink" title="vite"></a>vite</h1><h2 id="安装vite"><a href="#安装vite" class="headerlink" title="安装vite"></a>安装vite</h2><p>中文文档： <a class="link"   href="https://cn.vitejs.dev/guide/" >https://cn.vitejs.dev/guide/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>使用 NPM:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm create vite@latest</span><br></pre></td></tr></table></figure></div>
-<p>使用 Yarn:</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ yarn create vite</span><br></pre></td></tr></table></figure></div>
-
-<p>结果如下<br><img src="https://s2.loli.net/2024/08/26/dxMni1cpNw3TVZE.png"></p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>然后使用vscode中的project manager 来对我们的项目进行管理<br><img src="https://s2.loli.net/2024/08/26/LFhB1V8M4XRrgJi.png"><br>然后修改project.json<br><img src="https://s2.loli.net/2024/08/26/2NQdc7WsVG5g8Bb.png"></p>
-<div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line"> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;kyfly_client&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;rootPath&quot;</span><span class="punctuation">:</span> <span class="string">&quot;E:\\Golang\\github.com\\hybpjx\\kyfly_client&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tags&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;enabled&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure></div>
-
-<p>执行yarn 命令 安装资源包</p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn</span><br></pre></td></tr></table></figure></div>
-<p><img src="https://s2.loli.net/2024/08/26/Wr4ibtQ2YoM9eAq.png"></p>
-<p>然后执行yarn dev </p>
-<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">yarn dev</span><br></pre></td></tr></table></figure></div>
-<p><img src="https://s2.loli.net/2024/08/26/WonxGITwkDpv4ys.png"><br><img src="https://s2.loli.net/2024/08/26/HXT1glJmraRy8LK.png"></p>
-<p>启动成功！！<br><img src="https://s2.loli.net/2024/08/26/Xz291aoQPh3VY7I.png"></p>
-<p>然后置空所有其他无用的东西<br><img src="https://s2.loli.net/2024/08/26/oiWUVlOQxmRkF5D.png"><br>效果如上图</p>
-]]></content>
-      <categories>
-        <category>快速安装</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Ubuntu下安装redis并且设置远程登陆和密码</title>
-    <url>/2022/11/26/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E5%92%8C%E5%AF%86%E7%A0%81/</url>
+    <title>Gin_gorm时间格式化模型类重写</title>
+    <url>/2023/10/26/Gin-gorm%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A8%A1%E5%9E%8B%E7%B1%BB%E9%87%8D%E5%86%99/</url>
     <content><![CDATA[<!--toc-->
 <hr>
-<h1 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h1><blockquote>
-<p>sudo apt-get install -y redis-server</p>
-</blockquote>
-<h1 id="更改配置"><a href="#更改配置" class="headerlink" title="更改配置"></a>更改配置</h1><blockquote>
-<p>sudo vim &#x2F;etc&#x2F;redis&#x2F;redis.conf</p>
-</blockquote>
-<p><img src="https://s2.loli.net/2024/08/26/XThu9WoMF1INzCJ.png"><br><img src="https://s2.loli.net/2024/08/26/wGmL1tdIK6EhqWQ.png"><br><img src="https://s2.loli.net/2024/08/26/zRoObl6vKPq1riC.png"></p>
-<p>如果不知道怎么找<br>直接在命令行模式下输入<br>&#x2F;{你要搜索的东西} 然后按回车 然后按n是下一个 N是上一个</p>
-<h1 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h1><blockquote>
-<p>systemctl restart redis-server.service</p>
-</blockquote>
-<h1 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h1><p>使用远程工具 Redis Desktop Manager<br>下载地址<br>官网: <a class="link"   href="https://resp.app/pricing" >https://resp.app/pricing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>百度网盘：<a class="link"   href="https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g" >https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>提取码：00c0</p>
-<p><img src="https://s2.loli.net/2024/08/26/lynw3ZIqLeWk8g9.png"></p>
-<p><img src="https://s2.loli.net/2024/08/26/hziQdgPOETZaojN.png"><br>然后测试连接<br><img src="https://s2.loli.net/2024/08/26/mHoUBhuOxEz5W1e.png"></p>
-<p>代表成功</p>
-]]></content>
-      <categories>
-        <category>快速安装</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>GoRequests库</title>
-    <url>/2023/04/26/Golang%E4%B8%80%E6%97%A5%E4%B8%80%E5%BA%93%E4%B9%8BGoRequests/</url>
-    <content><![CDATA[<!-- toc -->
-
-<hr>
-<p>我们在使用Go做爬虫的时候，首先接触的肯定是 Golang 标准库 net&#x2F;http</p>
+<p>问题：</p>
 <blockquote>
-<p><a class="link"   href="https://pkg.go.dev/net/http" >https://pkg.go.dev/net/http <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>有兴趣的可以去看看文档。<br>但是老实说 这个库个人感觉不是特别的好用</p>
+<p>在使用GORM中 如果我们使用到了CreateAt 和UpdateAt 就会发现 这个时间的类型是time.Time 而其数据是<br>“2022-10-13T10:14:02.973528+08:00” 这样的,<br>然而这样的数据你说能用确实能用 ，但是一旦写入数据库中就变成了<br>0001-01-01 00:00:00.000000 +00:00</p>
 </blockquote>
-<p>有可能是之前就是使用了Python 所以还是感觉如果有像Python库中的requests<br>那样去实现请求就好了。<br>所以GoRequests 就诞生了。</p>
-<h1 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h1><p>DOC: <a class="link"   href="https://pkg.go.dev/github.com/levigross/grequests" >https://pkg.go.dev/github.com/levigross/grequests <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>Github: <a class="link"   href="http://github.com/levigross/grequests" >http://github.com/levigross/grequests <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<ul>
-<li>响应可以序列化为 JSON 和 XML</li>
-<li>轻松上传文件</li>
-<li>轻松下载文件</li>
-<li>支持以下 HTTP 谓词GET, HEAD, POST, PUT, DELETE, PATCH, OPTIONS</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">go get -u github.com/levigross/grequests</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><blockquote>
-<p>import “github.com&#x2F;levigross&#x2F;grequests”</p>
-</blockquote>
-<h1 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h1><h2 id="Get请求"><a href="#Get请求" class="headerlink" title="Get请求"></a>Get请求</h2><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">ro := &amp;RequestOptions&#123;</span><br><span class="line"> Params: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;hybpjx&quot;</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// url路径上的参数会被覆盖</span></span><br><span class="line">resp, err := grequests.Get(<span class="string">&quot;http://httpbin.org/get?h=1&quot;</span>, ro)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(resp.String())</span><br></pre></td></tr></table></figure></div>
-
-<h2 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h2><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">option := &amp;grequests.RequestOptions&#123;Data: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;https://www.cnblogs.com/zichliang/p/17302343.html&quot;</span>&#125;&#125;</span><br><span class="line">resp, err := grequests.Post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, option)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> resp.Ok != <span class="literal">true</span> &#123;</span><br><span class="line"> fmt.Println(resp.Ok)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="Post上传文件"><a href="#Post上传文件" class="headerlink" title="Post上传文件"></a>Post上传文件</h1><p>还可以支持上传文件</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 允许您通过指定磁盘上的位置来创建FileUpload结构片</span></span><br><span class="line">fd, err := grequests.FileUploadFromDisk(<span class="string">&quot;test/1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> fmt.Printf(<span class="string">&quot;文件打开失败:%v\n&quot;</span>, err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这将以请求的形式上传文件</span></span><br><span class="line">resp, _ := grequests.Post(<span class="string">&quot;http://httpbin.org/post&quot;</span>,</span><br><span class="line"> &amp;grequests.RequestOptions&#123;</span><br><span class="line">  Files: fd,</span><br><span class="line">  Data:  <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;One&quot;</span>: <span class="string">&quot;Two&quot;</span>&#125;,</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line">fmt.Println(resp.Ok,resp.StatusCode)</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="Gorequests-使用session"><a href="#Gorequests-使用session" class="headerlink" title="Gorequests 使用session"></a>Gorequests 使用session</h1><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">session := grequests.Session&#123;</span><br><span class="line">  RequestOptions: &amp;grequests.RequestOptions&#123;</span><br><span class="line">   Headers: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">    <span class="string">&quot;authority&quot;</span>:  <span class="string">&quot;mp3.haoge500.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;referer&quot;</span>:    <span class="string">&quot;https://www.zz123.com/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
-
-<h1 id="GoRequests-使用代理"><a href="#GoRequests-使用代理" class="headerlink" title="GoRequests 使用代理"></a>GoRequests 使用代理</h1><p>gorequest代理，非常简单 网上的Demo很多 也不只这一个<br>我展示的是阿布云的代理<br>需要注意的是 需要把 Proxies 中的url 添加为 *url.URL 代理</p>
-<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;github.com/levigross/grequests&quot;</span></span><br><span class="line"> <span class="string">&quot;net/url&quot;</span></span><br><span class="line"> <span class="string">&quot;testing&quot;</span></span><br><span class="line"> <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理服务器</span></span><br><span class="line"><span class="keyword">const</span> proxyServer = <span class="string">&quot;http-pro.xxx.com:9010&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理隧道验证信息</span></span><br><span class="line"><span class="keyword">const</span> proxyUser = <span class="string">&quot;xxxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxyPass = <span class="string">&quot;xxxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Proxy <span class="keyword">struct</span> &#123;</span><br><span class="line"> AppID     <span class="type">string</span></span><br><span class="line"> AppSecret <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Proxy)</span></span> ProxyURL() *url.URL &#123;</span><br><span class="line"> proxyUrl, _ := url.Parse(<span class="string">&quot;http://&quot;</span> + p.AppID + <span class="string">&quot;:&quot;</span> + p.AppSecret + <span class="string">&quot;@&quot;</span> + proxyServer)</span><br><span class="line"> <span class="keyword">return</span> proxyUrl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestCommon</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"> <span class="comment">// 初始化 proxy http client</span></span><br><span class="line"> proxyURL := Proxy&#123;AppID: proxyUser, AppSecret: proxyPass&#125;.ProxyURL()</span><br><span class="line"> fmt.Println(proxyURL)</span><br><span class="line"> trueUrl := <span class="string">&quot;http://www.xiushui.gov.cn/xxgk/bmxxgk/sthjj/sthj/xmhp/index.html&quot;</span></span><br><span class="line"> ro := &amp;grequests.RequestOptions&#123;</span><br><span class="line">  Headers: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">   <span class="string">&quot;user-agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  Proxies: <span class="keyword">map</span>[<span class="type">string</span>]*url.URL&#123;</span><br><span class="line">   <span class="string">&quot;http&quot;</span>: proxyURL,</span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;</span><br><span class="line"> resp, err := grequests.Get(trueUrl, ro)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="built_in">panic</span>(err.Error())</span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(<span class="string">&quot;&quot;</span>, resp.StatusCode)</span><br><span class="line"> time.Sleep(time.Second * <span class="number">10</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h1 id="重写数据类型"><a href="#重写数据类型" class="headerlink" title="重写数据类型"></a>重写数据类型</h1><p>话不多说 直接上代码<br>并且此代码通用【小弟也是copy学习视频上的】</p>
+<div class="highlight-container" data-rel="Go"><figure class="iseeu highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">&quot;database/sql/driver&quot;</span></span><br><span class="line">    <span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timeFormat = <span class="string">&quot;2006-01-02 15:04:05&quot;</span></span><br><span class="line"><span class="keyword">const</span> timezone = <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Time time.Time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> MarshalJSON() ([]<span class="type">byte</span>, <span class="type">error</span>) &#123;</span><br><span class="line">    b := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">0</span>, <span class="built_in">len</span>(timeFormat)+<span class="number">2</span>)</span><br><span class="line">    b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">    b = time.Time(t).AppendFormat(b, timeFormat)</span><br><span class="line">    b = <span class="built_in">append</span>(b, <span class="string">&#x27;&quot;&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> b, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> UnmarshalJSON(data []<span class="type">byte</span>) (err <span class="type">error</span>) &#123;</span><br><span class="line">    now, err := time.ParseInLocation(<span class="string">`&quot;`</span>+timeFormat+<span class="string">`&quot;`</span>, <span class="type">string</span>(data), time.Local)</span><br><span class="line">    *t = Time(now)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> String() <span class="type">string</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> time.Time(t).Format(timeFormat)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> local() time.Time &#123;</span><br><span class="line">    loc, _ := time.LoadLocation(timezone)</span><br><span class="line">    <span class="keyword">return</span> time.Time(t).In(loc)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t Time)</span></span> Value() (driver.Value, <span class="type">error</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> zeroTime time.Time</span><br><span class="line">    <span class="keyword">var</span> ti = time.Time(t)</span><br><span class="line">    <span class="keyword">if</span> ti.UnixNano() == zeroTime.UnixNano() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ti, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t *Time)</span></span> Scan(v <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">    value, ok := v.(time.Time)</span><br><span class="line">    <span class="keyword">if</span> ok &#123;</span><br><span class="line">        *t = Time(value)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;can not convert %v to timestamp&quot;</span>, v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h1 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h1><p>至于调用就更简单了 如下代码所示</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> model</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Category <span class="keyword">struct</span> &#123;</span><br><span class="line"> <span class="comment">//*gorm.Model</span></span><br><span class="line"> ID       <span class="type">uint</span>      <span class="string">`json:&quot;id&quot; gorm:&quot;primary key&quot;`</span></span><br><span class="line"> Name     <span class="type">string</span>    <span class="string">`json:&quot;name&quot; gorm:&quot;type:varchar(50); not null;unique&quot;`</span></span><br><span class="line"> CreatedAt Time     <span class="string">`json:&quot;create_at&quot;`</span></span><br><span class="line"> UpdatedAt Time     <span class="string">`json:&quot;update_at&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 ]]></content>
       <categories>
-        <category>一日一库</category>
+        <category>Gin速用</category>
       </categories>
       <tags>
         <tag>Golang</tag>
@@ -609,6 +542,73 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu下安装redis并且设置远程登陆和密码</title>
+    <url>/2022/11/26/Ubuntu%E4%B8%8B%E5%AE%89%E8%A3%85redis%E5%B9%B6%E4%B8%94%E8%AE%BE%E7%BD%AE%E8%BF%9C%E7%A8%8B%E7%99%BB%E9%99%86%E5%92%8C%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<!--toc-->
+<hr>
+<h1 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h1><blockquote>
+<p>sudo apt-get install -y redis-server</p>
+</blockquote>
+<h1 id="更改配置"><a href="#更改配置" class="headerlink" title="更改配置"></a>更改配置</h1><blockquote>
+<p>sudo vim &#x2F;etc&#x2F;redis&#x2F;redis.conf</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2024/08/26/XThu9WoMF1INzCJ.png"><br><img src="https://s2.loli.net/2024/08/26/wGmL1tdIK6EhqWQ.png"><br><img src="https://s2.loli.net/2024/08/26/zRoObl6vKPq1riC.png"></p>
+<p>如果不知道怎么找<br>直接在命令行模式下输入<br>&#x2F;{你要搜索的东西} 然后按回车 然后按n是下一个 N是上一个</p>
+<h1 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h1><blockquote>
+<p>systemctl restart redis-server.service</p>
+</blockquote>
+<h1 id="远程连接"><a href="#远程连接" class="headerlink" title="远程连接"></a>远程连接</h1><p>使用远程工具 Redis Desktop Manager<br>下载地址<br>官网: <a class="link"   href="https://resp.app/pricing" >https://resp.app/pricing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>百度网盘：<a class="link"   href="https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g" >https://pan.baidu.com/s/1dxo16QadKMuKPYT-z7nm6g <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>提取码：00c0</p>
+<p><img src="https://s2.loli.net/2024/08/26/lynw3ZIqLeWk8g9.png"></p>
+<p><img src="https://s2.loli.net/2024/08/26/hziQdgPOETZaojN.png"><br>然后测试连接<br><img src="https://s2.loli.net/2024/08/26/mHoUBhuOxEz5W1e.png"></p>
+<p>代表成功</p>
+]]></content>
+      <categories>
+        <category>快速安装</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>GoRequests库</title>
+    <url>/2023/04/26/Golang%E4%B8%80%E6%97%A5%E4%B8%80%E5%BA%93%E4%B9%8BGoRequests/</url>
+    <content><![CDATA[<!-- toc -->
+
+<hr>
+<p>我们在使用Go做爬虫的时候，首先接触的肯定是 Golang 标准库 net&#x2F;http</p>
+<blockquote>
+<p><a class="link"   href="https://pkg.go.dev/net/http" >https://pkg.go.dev/net/http <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>有兴趣的可以去看看文档。<br>但是老实说 这个库个人感觉不是特别的好用</p>
+</blockquote>
+<p>有可能是之前就是使用了Python 所以还是感觉如果有像Python库中的requests<br>那样去实现请求就好了。<br>所以GoRequests 就诞生了。</p>
+<h1 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h1><p>DOC: <a class="link"   href="https://pkg.go.dev/github.com/levigross/grequests" >https://pkg.go.dev/github.com/levigross/grequests <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>Github: <a class="link"   href="http://github.com/levigross/grequests" >http://github.com/levigross/grequests <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ul>
+<li>响应可以序列化为 JSON 和 XML</li>
+<li>轻松上传文件</li>
+<li>轻松下载文件</li>
+<li>支持以下 HTTP 谓词GET, HEAD, POST, PUT, DELETE, PATCH, OPTIONS</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">go get -u github.com/levigross/grequests</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h1><blockquote>
+<p>import “github.com&#x2F;levigross&#x2F;grequests”</p>
+</blockquote>
+<h1 id="发送请求"><a href="#发送请求" class="headerlink" title="发送请求"></a>发送请求</h1><h2 id="Get请求"><a href="#Get请求" class="headerlink" title="Get请求"></a>Get请求</h2><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">ro := &amp;RequestOptions&#123;</span><br><span class="line"> Params: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;hybpjx&quot;</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// url路径上的参数会被覆盖</span></span><br><span class="line">resp, err := grequests.Get(<span class="string">&quot;http://httpbin.org/get?h=1&quot;</span>, ro)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(resp.String())</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Post请求"><a href="#Post请求" class="headerlink" title="Post请求"></a>Post请求</h2><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">option := &amp;grequests.RequestOptions&#123;Data: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;url&quot;</span>: <span class="string">&quot;https://www.cnblogs.com/zichliang/p/17302343.html&quot;</span>&#125;&#125;</span><br><span class="line">resp, err := grequests.Post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, option)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> <span class="built_in">panic</span>(err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> resp.Ok != <span class="literal">true</span> &#123;</span><br><span class="line"> fmt.Println(resp.Ok)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="Post上传文件"><a href="#Post上传文件" class="headerlink" title="Post上传文件"></a>Post上传文件</h1><p>还可以支持上传文件</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 允许您通过指定磁盘上的位置来创建FileUpload结构片</span></span><br><span class="line">fd, err := grequests.FileUploadFromDisk(<span class="string">&quot;test/1&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line"> fmt.Printf(<span class="string">&quot;文件打开失败:%v\n&quot;</span>, err)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这将以请求的形式上传文件</span></span><br><span class="line">resp, _ := grequests.Post(<span class="string">&quot;http://httpbin.org/post&quot;</span>,</span><br><span class="line"> &amp;grequests.RequestOptions&#123;</span><br><span class="line">  Files: fd,</span><br><span class="line">  Data:  <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;<span class="string">&quot;One&quot;</span>: <span class="string">&quot;Two&quot;</span>&#125;,</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line">fmt.Println(resp.Ok,resp.StatusCode)</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="Gorequests-使用session"><a href="#Gorequests-使用session" class="headerlink" title="Gorequests 使用session"></a>Gorequests 使用session</h1><div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line">session := grequests.Session&#123;</span><br><span class="line">  RequestOptions: &amp;grequests.RequestOptions&#123;</span><br><span class="line">   Headers: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">    <span class="string">&quot;authority&quot;</span>:  <span class="string">&quot;mp3.haoge500.com&quot;</span>,</span><br><span class="line">    <span class="string">&quot;referer&quot;</span>:    <span class="string">&quot;https://www.zz123.com/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">   &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="GoRequests-使用代理"><a href="#GoRequests-使用代理" class="headerlink" title="GoRequests 使用代理"></a>GoRequests 使用代理</h1><p>gorequest代理，非常简单 网上的Demo很多 也不只这一个<br>我展示的是阿布云的代理<br>需要注意的是 需要把 Proxies 中的url 添加为 *url.URL 代理</p>
+<div class="highlight-container" data-rel="Golang"><figure class="iseeu highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> test</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"> <span class="string">&quot;github.com/levigross/grequests&quot;</span></span><br><span class="line"> <span class="string">&quot;net/url&quot;</span></span><br><span class="line"> <span class="string">&quot;testing&quot;</span></span><br><span class="line"> <span class="string">&quot;time&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理服务器</span></span><br><span class="line"><span class="keyword">const</span> proxyServer = <span class="string">&quot;http-pro.xxx.com:9010&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理隧道验证信息</span></span><br><span class="line"><span class="keyword">const</span> proxyUser = <span class="string">&quot;xxxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxyPass = <span class="string">&quot;xxxxxxxxx&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Proxy <span class="keyword">struct</span> &#123;</span><br><span class="line"> AppID     <span class="type">string</span></span><br><span class="line"> AppSecret <span class="type">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Proxy)</span></span> ProxyURL() *url.URL &#123;</span><br><span class="line"> proxyUrl, _ := url.Parse(<span class="string">&quot;http://&quot;</span> + p.AppID + <span class="string">&quot;:&quot;</span> + p.AppSecret + <span class="string">&quot;@&quot;</span> + proxyServer)</span><br><span class="line"> <span class="keyword">return</span> proxyUrl</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TestCommon</span><span class="params">(t *testing.T)</span></span> &#123;</span><br><span class="line"> <span class="comment">// 初始化 proxy http client</span></span><br><span class="line"> proxyURL := Proxy&#123;AppID: proxyUser, AppSecret: proxyPass&#125;.ProxyURL()</span><br><span class="line"> fmt.Println(proxyURL)</span><br><span class="line"> trueUrl := <span class="string">&quot;http://www.xiushui.gov.cn/xxgk/bmxxgk/sthjj/sthj/xmhp/index.html&quot;</span></span><br><span class="line"> ro := &amp;grequests.RequestOptions&#123;</span><br><span class="line">  Headers: <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">   <span class="string">&quot;user-agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  Proxies: <span class="keyword">map</span>[<span class="type">string</span>]*url.URL&#123;</span><br><span class="line">   <span class="string">&quot;http&quot;</span>: proxyURL,</span><br><span class="line">  &#125;,</span><br><span class="line"> &#125;</span><br><span class="line"> resp, err := grequests.Get(trueUrl, ro)</span><br><span class="line"> <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">  <span class="built_in">panic</span>(err.Error())</span><br><span class="line"> &#125;</span><br><span class="line"> fmt.Println(<span class="string">&quot;&quot;</span>, resp.StatusCode)</span><br><span class="line"> time.Sleep(time.Second * <span class="number">10</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+]]></content>
+      <categories>
+        <category>一日一库</category>
+      </categories>
+      <tags>
+        <tag>Golang</tag>
       </tags>
   </entry>
   <entry>
@@ -779,6 +779,49 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JSVMP逆向流程——QQ音乐</title>
+    <url>/2024/08/23/QQ%E9%9F%B3%E4%B9%90/</url>
+    <content><![CDATA[
+<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="cee553be26ced82ee960d3887a2b07e5c1a78e5bc82974908f3195ac00381600">83e5631915b29311d4c3e64518d9116cf799faaa72bca5bee977eff17ed08e1ece99b4463c2b5935746483d4c5a15edb14958198b2930f9bd4c599113c3b09114558f913c0eb0f950595ecffef3b3ff4dd0fcfea4466e81da8433649598d9bf6247c578e88cca7cf1583da86d37d2081e9f621384578fed6816d94b6d233423362d323fb6fd12348c0774959a5e96bb3bff8ce2321d570b48d9ca39e09d7f19083257fc6e35f409277fd440492c9596b8649cc8652fd6da95120102a7636d8e6feed127b5a50756afe2426815232408867b92c5b68887c6c73fda8bd6ac1f8e8644aeec8f087caad07bc361c1f2be91acf5d546dacca9008770962d632a2da6964021c6200d195b2c415fda527471690b0a2a8070a77570ff89ca872482784d71ca5efe35fef3eefd54464c84b5a074a9431b8d8fd74dfc8d82d23415bce53ae711086df7927d6a9025d88e3a5d375f1279859d0caa1b311dcbd9a29a2ee61ef964b2b14e813a0c0fc256b17c6b4af70ef4140770aeed72236a122978727da383f798c7142bfb19ee2211ee4e0ae5b6f20ae3b756429bb7172a62843b2efa379a8b36557afa1047b2c43873ac549736aa4fd71370d0ed215c10ec9b414cdd6c28a7989c60661708a603506fa5b9e7091194c7be1338f1154a908c7f671da00c424c09be10bc2a3711e5f7507bd168ede91a85190b7fc847164ec429c32029523fc1e1a09af37cf5de4c393f223a202f2cac07947bad2d2ad37988aa2ef9f76ec1cb8de93f20ad81956345e6ba75bb9019f75371f6637c74c6920901dc75f6fc04a0979178ff20b0197dbf7acdc3d76edc38881ce167c93e6e45a12c64fb9c4d277e1c592aa602cd08eed28fafefd367be9707f32bc896d3a6a2af5f503b889c1c56696eb2d9d2e4d448d352de884056d3c6813e3b03cc4c38f97f5fc00b67955aabc87561829bf4b3dfed791ddca92ef397283c79be1f08cc1c22c12473ef546ffd5c2d03dc2e101b8564263ac403713c0ae7033cab5f2c605c94aa0ee1d15f0d12aa803c409b8e52d2ecdd87846f151746afd45dc0ab854fe352e191ab200f112f99158843e1c232523514e9b73174d302254a2a57f574a6430ee77480e8998547fe00d25cba5aa4d590b6e195f7add46949ce960c33e60755b59fe37e685b8352e6ab91095f705a75527b5f69ae8ce7c36281bcbc36463270ec98a0a6b8b362076678826ea50e3538ae3ed2cdc06dda8949d2cf4df287b2873ce4b6ab22d38eaba09a3658ede8991e176325fefc1ec035bc5d116685cf31617919589d09363b10be990030a50c6bacedab6769116393c5bf05804f07810772ff565340b95d9131d65deff70ec5bef6255c19236321c86e3f23f77101c5f1f371db6b683ef824bb94019223b8eac896cd6ace60885ceabb77a88c88b2be57adf39120488eff0c18f7adc832c8561498750767d356995a2e92c67598d929d13b2ccd2db230763469398838ff563bc4654b1b8d8fe5a9de5a9ffd6d038d0554f74074e5d9ca5cc35b639c234ac15e473e18ed2d0e122b8980e721b192bb880029a906e93393429d0c6bd23fa1fa6150c499faa5d74585a5f6244e1b7f0277555cc927ffdd28fb765e56d0c458c83c7583c527c8f4ddde72be0a8eee4d210074bfa73bcd93a43a677cceca994d89b21bb3d93bc91ee6fed528234d441faa4fa81946a96b4d96952bcd66c58dcf9c167c85f74bf817c4f61641be6d0589a92ebcbd51c9fd894a6a59ace778c7c8f9d8a01d24758d0bf0a13d45a691f342eed1e1cbee2e0b2d9ba869750d55ac4e9bde711120fe15790fa82</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码哦。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>JS逆向</category>
+      </categories>
+      <tags>
+        <tag>JSVMP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>从零实现JSVMP</title>
+    <url>/2024/08/23/%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0JSVMP/</url>
+    <content><![CDATA[
+<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
+  <script id="hbeData" type="hbeData" data-hmacdigest="5b9a3ce179ac4247f8e5964230506357d027e2f80548add6517e49c66d19996e">83e5631915b29311d4c3e64518d9116c756c3e2e226792b7371cfd24a9946e54109f4320faa329a4a9ef06f584fae74b38d0d8614cd6a998299f2adeb367ad5d456f9225984b5ce5a2f04497c7b015dcd13df71ba3c89c8f9b912f6fb6162bd9e2c3e2b7823cdd9ab25aa54a2b842bd59b394dd76c63121a19c1a8097fb1a5a1dcddc763898b2fa3fbbbedd1fa4bc8723b18fc86ac35962b207152d4fc5aa0b2284818003e61a25152dc06ab2f627268843e806e5ca8da7eff8e60e69483aee165b43c6ee8826c8d59eb73fd8f950f0bd608892721e05e4f587dfe1f840efb4fd8f559488834a38aa37b80ef521be65ef24d2af82313b24deeec96c1b34514155a7d7eaf849de6f9002f26e7d6137513584395d0301bbf25d77b7ce89d880f822c05faa88031cebedc1157a0e685d397157a6521623dae00ab2f13487e0538de23cea71b3321a115adcd4c4ad504fd13f72d9870e06f0c2a2b60d0055d5fc5d061ad72da53a1b768bae86f9729df8a262f50de59230587da00ccf6a3b011570155f640843ded6522802421cdefae3a8fe39dd0ad2b6e79960f05e84f07643310e6d30f31b704fa628c092e1cb22a8cb0aad73e52f3469211c7db28cfee5201ab2d7bfc901d06db76302219f94d9bcb326169c5839d54c8bc44f75806a1e1d52e50dcdef2fc70f27d739f93351d482cebe9de16510a9c555003718bfbed1c68bdb7c6cfc75eef49018e26d614a4d41ed0b51e1fd617bb34f8a18e29f9567f0306674d32da5bc343026743db0baef2f630b007d0318f2459c7331dea7a05c04ee04e9293f17a8159d2c0ceb49140eff280e1b9062e96bfcd44f22ea64c3b2a1058c7fe2dcea455bc77237afe23bc2c07ed48a89aae0d946cd06ef4ff18d9f24751322176fd71d59428f854b26e3494d9384f2eb2ff66b20ce0b56158e24e5d27205eda52e8c4b0459a2c6278a93eb908e38da900a8eae3991453062a7f3a08e783b87f208f9e4a7a75c609b09aa1ca15fe61ffbdecd41e1863cabbfba25d7e9f0c3d942efdb0908b664e97bd79cf9dc5aadaf4c61280d6ca6686e9c85c3f71d633853932b005afb92b3a3fd3d9bfcd435f1eb5fc132d24b93e6d89b7728603502420eee3cf88b7da54409fff69046ee0cc95bf206c953e7905f3bf9658815d610b3d8150417d712bb4edbf1d27e7c3dd7fdbc92998795e2899ca523faa1051f65a936a28dfe90e4b265fbf069fdde60be02971a84af817f829c9e0457c7283adf1374d462ac2902713c96d4058b90d7fc71ec8e04af3d4af60d0af70ee0a40096083b6f457b243efee971711ee96b13ecd8e62f0a23b1bb8049f3bbfbcce81961216a1fdccd1e72e86ebc1503b4aa554854b8970adcf8a3534d187acd1384777c1b29156a51dd3cfcfdb9019d41bb5cdd3850352d00bb2cd0c483f1976053ff51042022e306d280d085d4501f417eda19bfff75535ac6369b72dd4234ce2d5f0aa80e550fb583189c062fb18d4640689c6ca52750d2a6c37e9bdd6f19fbe53a0463bb83f3f91d9b449a2344861a4bd773ec6aade2223caaa34021849a7cdb36bfe846096bd53893a45d3861070b518caae87f55a8e2466ec579c448d3b99a3142cf04379b6972091e6e97a696c6503cb38398e5b90ee866479ec1f03686d7a73293a47b0283ce390e184f46c00b796663f3f039a5dbc39358c29169318fe44cc0313d184057e6d70b08809fa9b97139ee1e52f332d2b99ce45bf48658cc7ed51e667b931e56576a63ac94a142d03f0de8947bd20f7beb87bcf13fd0fddd4e92bae48db2b86c6789c3c0038fa6d538b71f849a21054d3d21855eb9d55e9d056953aedffb68f2409c0bfd1bdb9280867b416</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码哦。</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+      <tags>
+        <tag>JSVMP</tag>
       </tags>
   </entry>
   <entry>
@@ -1030,49 +1073,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JSVMP逆向流程——QQ音乐</title>
-    <url>/2024/08/23/QQ%E9%9F%B3%E4%B9%90/</url>
-    <content><![CDATA[
-<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="cee553be26ced82ee960d3887a2b07e5c1a78e5bc82974908f3195ac00381600">83e5631915b29311d4c3e64518d9116cf799faaa72bca5bee977eff17ed08e1ece99b4463c2b5935746483d4c5a15edb14958198b2930f9bd4c599113c3b09114558f913c0eb0f950595ecffef3b3ff4dd0fcfea4466e81da8433649598d9bf6247c578e88cca7cf1583da86d37d2081e9f621384578fed6816d94b6d233423362d323fb6fd12348c0774959a5e96bb3bff8ce2321d570b48d9ca39e09d7f19083257fc6e35f409277fd440492c9596b8649cc8652fd6da95120102a7636d8e6feed127b5a50756afe2426815232408867b92c5b68887c6c73fda8bd6ac1f8e8644aeec8f087caad07bc361c1f2be91acf5d546dacca9008770962d632a2da6964021c6200d195b2c415fda527471690b0a2a8070a77570ff89ca872482784d71ca5efe35fef3eefd54464c84b5a074a9431b8d8fd74dfc8d82d23415bce53ae711086df7927d6a9025d88e3a5d375f1279859d0caa1b311dcbd9a29a2ee61ef964b2b14e813a0c0fc256b17c6b4af70ef4140770aeed72236a122978727da383f798c7142bfb19ee2211ee4e0ae5b6f20ae3b756429bb7172a62843b2efa379a8b36557afa1047b2c43873ac549736aa4fd71370d0ed215c10ec9b414cdd6c28a7989c60661708a603506fa5b9e7091194c7be1338f1154a908c7f671da00c424c09be10bc2a3711e5f7507bd168ede91a85190b7fc847164ec429c32029523fc1e1a09af37cf5de4c393f223a202f2cac07947bad2d2ad37988aa2ef9f76ec1cb8de93f20ad81956345e6ba75bb9019f75371f6637c74c6920901dc75f6fc04a0979178ff20b0197dbf7acdc3d76edc38881ce167c93e6e45a12c64fb9c4d277e1c592aa602cd08eed28fafefd367be9707f32bc896d3a6a2af5f503b889c1c56696eb2d9d2e4d448d352de884056d3c6813e3b03cc4c38f97f5fc00b67955aabc87561829bf4b3dfed791ddca92ef397283c79be1f08cc1c22c12473ef546ffd5c2d03dc2e101b8564263ac403713c0ae7033cab5f2c605c94aa0ee1d15f0d12aa803c409b8e52d2ecdd87846f151746afd45dc0ab854fe352e191ab200f112f99158843e1c232523514e9b73174d302254a2a57f574a6430ee77480e8998547fe00d25cba5aa4d590b6e195f7add46949ce960c33e60755b59fe37e685b8352e6ab91095f705a75527b5f69ae8ce7c36281bcbc36463270ec98a0a6b8b362076678826ea50e3538ae3ed2cdc06dda8949d2cf4df287b2873ce4b6ab22d38eaba09a3658ede8991e176325fefc1ec035bc5d116685cf31617919589d09363b10be990030a50c6bacedab6769116393c5bf05804f07810772ff565340b95d9131d65deff70ec5bef6255c19236321c86e3f23f77101c5f1f371db6b683ef824bb94019223b8eac896cd6ace60885ceabb77a88c88b2be57adf39120488eff0c18f7adc832c8561498750767d356995a2e92c67598d929d13b2ccd2db230763469398838ff563bc4654b1b8d8fe5a9de5a9ffd6d038d0554f74074e5d9ca5cc35b639c234ac15e473e18ed2d0e122b8980e721b192bb880029a906e93393429d0c6bd23fa1fa6150c499faa5d74585a5f6244e1b7f0277555cc927ffdd28fb765e56d0c458c83c7583c527c8f4ddde72be0a8eee4d210074bfa73bcd93a43a677cceca994d89b21bb3d93bc91ee6fed528234d441faa4fa81946a96b4d96952bcd66c58dcf9c167c85f74bf817c4f61641be6d0589a92ebcbd51c9fd894a6a59ace778c7c8f9d8a01d24758d0bf0a13d45a691f342eed1e1cbee2e0b2d9ba869750d55ac4e9bde711120fe15790fa82</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码哦。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <categories>
-        <category>JS逆向</category>
-      </categories>
-      <tags>
-        <tag>JSVMP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>从零实现JSVMP</title>
-    <url>/2024/08/23/%E4%BB%8E%E9%9B%B6%E5%AE%9E%E7%8E%B0JSVMP/</url>
-    <content><![CDATA[
-<div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="抱歉，这个密码看着不太对，请再试试。" data-whm="抱歉，这个文章不能被纠正，不过您还是能看看解密后的内容。">
-  <script id="hbeData" type="hbeData" data-hmacdigest="5b9a3ce179ac4247f8e5964230506357d027e2f80548add6517e49c66d19996e">83e5631915b29311d4c3e64518d9116c756c3e2e226792b7371cfd24a9946e54109f4320faa329a4a9ef06f584fae74b38d0d8614cd6a998299f2adeb367ad5d456f9225984b5ce5a2f04497c7b015dcd13df71ba3c89c8f9b912f6fb6162bd9e2c3e2b7823cdd9ab25aa54a2b842bd59b394dd76c63121a19c1a8097fb1a5a1dcddc763898b2fa3fbbbedd1fa4bc8723b18fc86ac35962b207152d4fc5aa0b2284818003e61a25152dc06ab2f627268843e806e5ca8da7eff8e60e69483aee165b43c6ee8826c8d59eb73fd8f950f0bd608892721e05e4f587dfe1f840efb4fd8f559488834a38aa37b80ef521be65ef24d2af82313b24deeec96c1b34514155a7d7eaf849de6f9002f26e7d6137513584395d0301bbf25d77b7ce89d880f822c05faa88031cebedc1157a0e685d397157a6521623dae00ab2f13487e0538de23cea71b3321a115adcd4c4ad504fd13f72d9870e06f0c2a2b60d0055d5fc5d061ad72da53a1b768bae86f9729df8a262f50de59230587da00ccf6a3b011570155f640843ded6522802421cdefae3a8fe39dd0ad2b6e79960f05e84f07643310e6d30f31b704fa628c092e1cb22a8cb0aad73e52f3469211c7db28cfee5201ab2d7bfc901d06db76302219f94d9bcb326169c5839d54c8bc44f75806a1e1d52e50dcdef2fc70f27d739f93351d482cebe9de16510a9c555003718bfbed1c68bdb7c6cfc75eef49018e26d614a4d41ed0b51e1fd617bb34f8a18e29f9567f0306674d32da5bc343026743db0baef2f630b007d0318f2459c7331dea7a05c04ee04e9293f17a8159d2c0ceb49140eff280e1b9062e96bfcd44f22ea64c3b2a1058c7fe2dcea455bc77237afe23bc2c07ed48a89aae0d946cd06ef4ff18d9f24751322176fd71d59428f854b26e3494d9384f2eb2ff66b20ce0b56158e24e5d27205eda52e8c4b0459a2c6278a93eb908e38da900a8eae3991453062a7f3a08e783b87f208f9e4a7a75c609b09aa1ca15fe61ffbdecd41e1863cabbfba25d7e9f0c3d942efdb0908b664e97bd79cf9dc5aadaf4c61280d6ca6686e9c85c3f71d633853932b005afb92b3a3fd3d9bfcd435f1eb5fc132d24b93e6d89b7728603502420eee3cf88b7da54409fff69046ee0cc95bf206c953e7905f3bf9658815d610b3d8150417d712bb4edbf1d27e7c3dd7fdbc92998795e2899ca523faa1051f65a936a28dfe90e4b265fbf069fdde60be02971a84af817f829c9e0457c7283adf1374d462ac2902713c96d4058b90d7fc71ec8e04af3d4af60d0af70ee0a40096083b6f457b243efee971711ee96b13ecd8e62f0a23b1bb8049f3bbfbcce81961216a1fdccd1e72e86ebc1503b4aa554854b8970adcf8a3534d187acd1384777c1b29156a51dd3cfcfdb9019d41bb5cdd3850352d00bb2cd0c483f1976053ff51042022e306d280d085d4501f417eda19bfff75535ac6369b72dd4234ce2d5f0aa80e550fb583189c062fb18d4640689c6ca52750d2a6c37e9bdd6f19fbe53a0463bb83f3f91d9b449a2344861a4bd773ec6aade2223caaa34021849a7cdb36bfe846096bd53893a45d3861070b518caae87f55a8e2466ec579c448d3b99a3142cf04379b6972091e6e97a696c6503cb38398e5b90ee866479ec1f03686d7a73293a47b0283ce390e184f46c00b796663f3f039a5dbc39358c29169318fe44cc0313d184057e6d70b08809fa9b97139ee1e52f332d2b99ce45bf48658cc7ed51e667b931e56576a63ac94a142d03f0de8947bd20f7beb87bcf13fd0fddd4e92bae48db2b86c6789c3c0038fa6d538b71f849a21054d3d21855eb9d55e9d056953aedffb68f2409c0bfd1bdb9280867b416</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">您好，这里需要密码哦。</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
-      <tags>
-        <tag>JSVMP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AST_解OB混淆_速记</title>
     <url>/2024/08/31/AST-%E9%80%9F%E8%AE%B0/</url>
     <content><![CDATA[
@@ -1111,6 +1111,82 @@
   </div>
 </div>
 <script data-swup-reload-script src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">]]></content>
+  </entry>
+  <entry>
+    <title>浏览器插件开发</title>
+    <url>/2024/09/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p>本文参考文档:  <a class="link"   href="https://www.yuque.com/tuntun-nozomi/gurht0" >浏览器插件开发教程文档 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> </p>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><ul>
+<li>manifest.json</li>
+<li>service worker</li>
+<li>content scripts</li>
+<li>插件页面</li>
+</ul>
+<h1 id="manifest-json"><a href="#manifest-json" class="headerlink" title="manifest.json"></a>manifest.json</h1><div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// 必须的</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;插件名称&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;版本&quot;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 常用</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;插件描述&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;作者名&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 配置service worker</span></span><br><span class="line">  <span class="attr">&quot;service_worker&quot;</span><span class="punctuation">:</span> <span class="string">&quot;background.js&quot;</span></span><br><span class="line"> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;options_ui&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 配置options页面</span></span><br><span class="line">  <span class="attr">&quot;page&quot;</span><span class="punctuation">:</span> <span class="string">&quot;options.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;open_in_tab&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置content scripts</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;*://www.baidu.com/*&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;test.js&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;all_frames&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;css&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;web_accessible_resources&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置Web可访问资源</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;*://www.baidu.com/*&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;resources&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;test.css&quot;</span></span><br><span class="line">   <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;host_permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 与主机权限相关，推荐使用同样的设置</span></span><br><span class="line">  <span class="string">&quot;https://*/*&quot;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置插件所使用的api权限</span></span><br><span class="line">  <span class="string">&quot;storage&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;contextMenus&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;cookies&quot;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 使用action api配置插件工具栏中图标、弹出页面等内容</span></span><br><span class="line">  <span class="attr">&quot;default_icon&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon32.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;64&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon64.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon128.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon32.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;64&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon64.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon128.png&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="content-scripts"><a href="#content-scripts" class="headerlink" title="content scripts"></a>content scripts</h2><p>文档如下: <a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/" >https://developer.chrome.com/docs/extensions/mv3/content_scripts/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>content scripts只能使用部分的浏览器api，最常用的api为storage与runtime两个api。</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>详情</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>matches</td>
+<td>指定此内容脚本将被注入到哪些页面，详见<a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/match_patterns/" >match_patterns <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
+<td></td>
+</tr>
+<tr>
+<td>js</td>
+<td>要注入匹配页面的 JavaScript 文件列表。它们按照它们在此数组中出现的顺序注入。</td>
+<td></td>
+</tr>
+<tr>
+<td>css</td>
+<td>要注入匹配页面的 CSS 文件列表。在为页面构造或显示任何 DOM 之前，它们按照它们在此数组中出现的顺序注入。</td>
+<td></td>
+</tr>
+<tr>
+<td>all_frames</td>
+<td>默认为<code>false</code>，表示仅匹配顶部框架。 如果指定<code>true</code>，它将注入所有框架，即使该框架不是选项卡中最顶层的框架。每个框架都独立检查 URL 要求，如果不满足 URL 要求，它不会注入子框架。</td>
+<td></td>
+</tr>
+<tr>
+<td>run_at</td>
+<td>document_idle</td>
+<td>参考：<a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/#run_time" >运行 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
+</tr>
+<tr>
+<td>document_start</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>document_end</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="service-worker"><a href="#service-worker" class="headerlink" title="service worker"></a>service worker</h2><p>一个插件只能有一个service worker，可以在manifest配置type来使service worker声明为<code>ES Module</code></p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line">&quot;<span class="attribute">background</span>&quot;: &#123;</span><br><span class="line">  &quot;service_worker&quot;: <span class="string">&quot;background.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;module&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在background.js 中 设置如下</p>
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line">chrome.<span class="property">action</span>.<span class="property">onClicked</span>.<span class="title function_">addListener</span>(<span class="title function_">async</span> (tab) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(tab);</span><br><span class="line">    <span class="keyword">if</span> (tab.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&quot;www.baidu.com&quot;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;this is baidu page&quot;</span>);</span><br><span class="line">        chrome.<span class="property">scripting</span>.<span class="title function_">executeScript</span>(&#123;</span><br><span class="line">            <span class="attr">target</span>: &#123; <span class="attr">tabId</span>: tab.<span class="property">id</span> &#125;,</span><br><span class="line">            <span class="attr">files</span>: [<span class="string">&#x27;exec.js&#x27;</span>],</span><br><span class="line">            <span class="attr">world</span>:<span class="string">&quot;MAIN&quot;</span> <span class="comment">// 设置主环境</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;this is not baidu page&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div>
+
+<p>上文意思是。点击这个图标 代表着 执行下面这个js 并且主环境</p>
+<h2 id="Ul-elements"><a href="#Ul-elements" class="headerlink" title="Ul elements"></a>Ul elements</h2><p><a class="link"   href="https://developer.chrome.com/docs/extensions/develop/ui?hl=zh-cn#additional_features" >界面组件  | Chrome Extensions  | Chrome for Developers <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>样式很多 自己看</p>
+<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p><a class="link"   href="https://developer.chrome.com/docs/extensions/develop/ui?hl=zh-cn#additional_features" >界面组件  | Chrome Extensions  | Chrome for Developers <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>由于content_scripts运行在网页中，而不是浏览器插件的环境，所以它需要一些特殊的方式来和浏览器插件的内容进行通信。</p>
+<p>通信的方式包括用于一次性请求的简单通信和用于长期连接的长连接通信。</p>
+<p>挨个传递通信</p>
+]]></content>
+      <categories>
+        <category>浏览器开发</category>
+      </categories>
   </entry>
   <entry>
     <title>美团ebooking登录爬取流程</title>
@@ -1209,82 +1285,6 @@
 <h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>plasmo.config.ts</p>
 <div class="highlight-container" data-rel="Ts"><figure class="iseeu highlight ts"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">PlasmoConfig</span> &#125; <span class="keyword">from</span> <span class="string">&quot;@plasmo/core&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">PlasmoConfig</span>(&#123;</span><br><span class="line">  <span class="comment">// 配置项</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>plasmo 是一个功能强大的浏览器扩展开发框架，它提供了丰富的 API 和插件系统，可以帮助开发者快速构建出具有强大功能的浏览器扩展。通过使用 plasmo，开发者可以轻松地实现广告拦截、密码管理、翻译工具等功能，为用户提供更加便捷、安全的浏览体验。</p>
-]]></content>
-      <categories>
-        <category>浏览器开发</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>浏览器插件开发</title>
-    <url>/2024/09/05/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</url>
-    <content><![CDATA[<p>本文参考文档:  <a class="link"   href="https://www.yuque.com/tuntun-nozomi/gurht0" >浏览器插件开发教程文档 (yuque.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> </p>
-<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><ul>
-<li>manifest.json</li>
-<li>service worker</li>
-<li>content scripts</li>
-<li>插件页面</li>
-</ul>
-<h1 id="manifest-json"><a href="#manifest-json" class="headerlink" title="manifest.json"></a>manifest.json</h1><div class="highlight-container" data-rel="Json"><figure class="iseeu highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="comment">// 必须的</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;插件名称&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;版本&quot;</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 常用</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;插件描述&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;作者名&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 配置service worker</span></span><br><span class="line">  <span class="attr">&quot;service_worker&quot;</span><span class="punctuation">:</span> <span class="string">&quot;background.js&quot;</span></span><br><span class="line"> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;options_ui&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 配置options页面</span></span><br><span class="line">  <span class="attr">&quot;page&quot;</span><span class="punctuation">:</span> <span class="string">&quot;options.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;open_in_tab&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line"> <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置content scripts</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;*://www.baidu.com/*&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;test.js&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;all_frames&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;css&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;web_accessible_resources&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置Web可访问资源</span></span><br><span class="line">  <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;*://www.baidu.com/*&quot;</span></span><br><span class="line">   <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;resources&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;test.css&quot;</span></span><br><span class="line">   <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;host_permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 与主机权限相关，推荐使用同样的设置</span></span><br><span class="line">  <span class="string">&quot;https://*/*&quot;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;permissions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="comment">// 配置插件所使用的api权限</span></span><br><span class="line">  <span class="string">&quot;storage&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;contextMenus&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="string">&quot;cookies&quot;</span></span><br><span class="line"> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"> <span class="attr">&quot;action&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> <span class="comment">// 使用action api配置插件工具栏中图标、弹出页面等内容</span></span><br><span class="line">  <span class="attr">&quot;default_icon&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon32.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;64&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon64.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon128.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;default_popup&quot;</span><span class="punctuation">:</span> <span class="string">&quot;popup.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon32.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon48.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;64&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon64.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">   <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;icon128.png&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div>
-
-<h2 id="content-scripts"><a href="#content-scripts" class="headerlink" title="content scripts"></a>content scripts</h2><p>文档如下: <a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/" >https://developer.chrome.com/docs/extensions/mv3/content_scripts/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>content scripts只能使用部分的浏览器api，最常用的api为storage与runtime两个api。</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>详情</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>matches</td>
-<td>指定此内容脚本将被注入到哪些页面，详见<a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/match_patterns/" >match_patterns <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
-<td></td>
-</tr>
-<tr>
-<td>js</td>
-<td>要注入匹配页面的 JavaScript 文件列表。它们按照它们在此数组中出现的顺序注入。</td>
-<td></td>
-</tr>
-<tr>
-<td>css</td>
-<td>要注入匹配页面的 CSS 文件列表。在为页面构造或显示任何 DOM 之前，它们按照它们在此数组中出现的顺序注入。</td>
-<td></td>
-</tr>
-<tr>
-<td>all_frames</td>
-<td>默认为<code>false</code>，表示仅匹配顶部框架。 如果指定<code>true</code>，它将注入所有框架，即使该框架不是选项卡中最顶层的框架。每个框架都独立检查 URL 要求，如果不满足 URL 要求，它不会注入子框架。</td>
-<td></td>
-</tr>
-<tr>
-<td>run_at</td>
-<td>document_idle</td>
-<td>参考：<a class="link"   href="https://developer.chrome.com/docs/extensions/mv3/content_scripts/#run_time" >运行 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></td>
-</tr>
-<tr>
-<td>document_start</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>document_end</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="service-worker"><a href="#service-worker" class="headerlink" title="service worker"></a>service worker</h2><p>一个插件只能有一个service worker，可以在manifest配置type来使service worker声明为<code>ES Module</code></p>
-<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line">&quot;<span class="attribute">background</span>&quot;: &#123;</span><br><span class="line">  &quot;service_worker&quot;: <span class="string">&quot;background.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;module&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>在background.js 中 设置如下</p>
-<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line">chrome.<span class="property">action</span>.<span class="property">onClicked</span>.<span class="title function_">addListener</span>(<span class="title function_">async</span> (tab) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(tab);</span><br><span class="line">    <span class="keyword">if</span> (tab.<span class="property">url</span>.<span class="title function_">includes</span>(<span class="string">&quot;www.baidu.com&quot;</span>)) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;this is baidu page&quot;</span>);</span><br><span class="line">        chrome.<span class="property">scripting</span>.<span class="title function_">executeScript</span>(&#123;</span><br><span class="line">            <span class="attr">target</span>: &#123; <span class="attr">tabId</span>: tab.<span class="property">id</span> &#125;,</span><br><span class="line">            <span class="attr">files</span>: [<span class="string">&#x27;exec.js&#x27;</span>],</span><br><span class="line">            <span class="attr">world</span>:<span class="string">&quot;MAIN&quot;</span> <span class="comment">// 设置主环境</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;this is not baidu page&quot;</span>); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div>
-
-<p>上文意思是。点击这个图标 代表着 执行下面这个js 并且主环境</p>
-<h2 id="Ul-elements"><a href="#Ul-elements" class="headerlink" title="Ul elements"></a>Ul elements</h2><p><a class="link"   href="https://developer.chrome.com/docs/extensions/develop/ui?hl=zh-cn#additional_features" >界面组件  | Chrome Extensions  | Chrome for Developers <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>样式很多 自己看</p>
-<h2 id="通信"><a href="#通信" class="headerlink" title="通信"></a>通信</h2><p><a class="link"   href="https://developer.chrome.com/docs/extensions/develop/ui?hl=zh-cn#additional_features" >界面组件  | Chrome Extensions  | Chrome for Developers <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<p>由于content_scripts运行在网页中，而不是浏览器插件的环境，所以它需要一些特殊的方式来和浏览器插件的内容进行通信。</p>
-<p>通信的方式包括用于一次性请求的简单通信和用于长期连接的长连接通信。</p>
-<p>挨个传递通信</p>
 ]]></content>
       <categories>
         <category>浏览器开发</category>
